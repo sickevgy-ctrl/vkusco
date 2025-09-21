@@ -1,0 +1,105 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  html {
+    font-family: 'Montserrat', sans-serif;
+    scroll-behavior: smooth;
+  }
+  :root{
+    --brand-primary:#3A4F2E;
+    --brand-primary-600:#314426;
+    --brand-primary-700:#293920;
+    --brand-accent:#6F8F4B;
+    --brand-surface:#FFFFFF;
+    --brand-muted:#F3F4F6;
+    --brand-radius-md:12px;
+    --brand-radius-lg:16px;
+    --brand-radius-xl:20px;
+  }
+  
+  .font-playfair {
+    font-family: 'Cormorant Garamond', serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    background-color: var(--brand-primary);
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--brand-radius-lg);
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--brand-primary-700);
+  }
+  
+  .btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--brand-primary);
+    color: var(--brand-primary);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--brand-radius-lg);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+  }
+  
+  .btn-secondary:hover {
+    background-color: var(--brand-primary);
+    color: white;
+  }
+  
+  .section-title {
+    font-size: 2.25rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: #1f2937;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  @media (min-width: 768px) {
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(90deg, rgba(58,79,46,0.95), rgba(111,143,75,0.95), rgba(58,79,46,0.85));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Glassmorphism panel */
+  .glass {
+    background: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.25);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  /* Soft glow border */
+  .glow {
+    box-shadow: 0 0 0 3px rgba(58, 79, 46, 0.15), 0 15px 40px -15px rgba(58, 79, 46, 0.5);
+  }
+
+  /* Shimmer skeleton */
+  .skeleton {
+    background: linear-gradient(90deg, #eee 25%, #f5f5f5 37%, #eee 63%);
+    background-size: 400% 100%;
+    animation: shimmer 1.4s ease infinite;
+  }
+    .section-title {
+      font-size: 2.5rem;
+    }
+  }
+}
