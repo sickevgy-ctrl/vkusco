@@ -1,4 +1,4 @@
-# «Вкусная компания» — Сайт ресторана
+# «Вкусная компания» — сайт ресторана
 
 Современный сайт ресторана, созданный на Nuxt.js с использованием Tailwind CSS.
 
@@ -14,7 +14,7 @@
 ## 📁 Структура проекта
 
 ```
-restaurant-nuxt/
+vkusnayakompania/
 ├── assets/
 │   └── css/
 │       └── main.css          # Глобальные стили
@@ -40,7 +40,7 @@ restaurant-nuxt/
 - **Nuxt.js 3** - фреймворк Vue.js для SSR
 - **Vue.js 3** - прогрессивный JavaScript фреймворк
 - **Tailwind CSS** - utility-first CSS фреймворк
-- **Google Fonts** - красивые веб-шрифты (Inter, Playfair Display)
+- **Google Fonts** - красивые веб-шрифты (Montserrat, Cormorant Garamond)
 
 ## 📋 Требования
 
@@ -51,8 +51,8 @@ restaurant-nuxt/
 
 1. **Клонируйте репозиторий:**
    ```bash
-   git clone <repository-url>
-   cd restaurant-nuxt
+   git clone https://github.com/vkusrest/vkusnayakompania.git
+   cd vkusnayakompania
    ```
 
 2. **Установите зависимости:**
@@ -101,8 +101,8 @@ npm run postinstall
 ### Шрифты
 
 Используются два шрифта:
-- **Inter** - для основного текста
-- **Playfair Display** - для заголовков
+- **Montserrat** — для основного текста и интерфейса
+- **Cormorant Garamond** — для заголовков
 
 Настройка в `nuxt.config.ts` через модуль `@nuxtjs/google-fonts`.
 

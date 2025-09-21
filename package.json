@@ -1,8 +1,16 @@
 {
-  "name": "restaurant-nuxt",
+  "name": "vkusnayakompania",
   "version": "1.0.0",
-  "description": "Современный сайт ресторана на Nuxt.js",
+  "description": "«Вкусная компания» — современный сайт ресторана на Nuxt 3",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vkusrest/vkusnayakompania.git"
+  },
+  "homepage": "https://github.com/vkusrest/vkusnayakompania#readme",
+  "bugs": {
+    "url": "https://github.com/vkusrest/vkusnayakompania/issues"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
