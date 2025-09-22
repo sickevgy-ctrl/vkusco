@@ -1,10 +1,10 @@
 <template>
   <div>
     <!-- Заголовок -->
-    <section class="bg-gray-900 text-white py-20">
+  <section class="text-white py-20" aria-labelledby="contact-title">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4">Контакты</h1>
-        <p class="text-xl text-gray-300">Свяжитесь с нами или забронируйте столик</p>
+  <h1 id="contact-title" v-split class="text-4xl md:text-5xl font-playfair font-bold mb-4">Контакты</h1>
+  <p v-split="{ types: 'words, chars', delayStep: 0.02 }" class="text-xl text-gray-300">Свяжитесь с нами или забронируйте столик</p>
       </div>
     </section>
 
@@ -12,62 +12,62 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <!-- Контактная информация -->
         <div>
-          <h2 class="text-3xl font-playfair font-bold text-gray-800 mb-8">Как нас найти</h2>
+          <h2 v-split class="text-3xl font-playfair font-bold text-white mb-8">Как нас найти</h2>
           
           <div class="space-y-6">
             <!-- Адрес -->
             <div class="flex items-start space-x-4">
-              <div class="bg-primary-100 p-3 rounded-lg">
-                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="bg-white/10 p-3 rounded-lg">
+                <svg class="w-6 h-6 text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                 </svg>
               </div>
               <div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">Адрес</h3>
-                <p class="text-gray-600">г. Москва, ул. Арбат, 15</p>
-                <p class="text-gray-600">м. Арбатская, 3 минуты пешком</p>
+                <h3 class="text-lg font-semibold text-white mb-1">Адрес</h3>
+                <p class="text-gray-200/90">г. Самара, ул. Советской Армии, 177</p>
+                <p class="text-gray-200/90">Рядом с удобной парковкой</p>
               </div>
             </div>
 
             <!-- Телефон -->
             <div class="flex items-start space-x-4">
-              <div class="bg-primary-100 p-3 rounded-lg">
-                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="bg-white/10 p-3 rounded-lg">
+                <svg class="w-6 h-6 text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                 </svg>
               </div>
               <div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">Телефон</h3>
-                <p class="text-gray-600">+7 (495) 123-45-67</p>
-                <p class="text-gray-600">Бронирование столиков</p>
+                <h3 class="text-lg font-semibold text-white mb-1">Телефон</h3>
+                <p class="text-gray-200/90"><a href="tel:+79171421574" class="underline hover:text-primary-300">+7 (917) 142-15-74</a></p>
+                <p class="text-gray-200/90">Бронирование столиков и консультация</p>
               </div>
             </div>
 
             <!-- Email -->
             <div class="flex items-start space-x-4">
-              <div class="bg-primary-100 p-3 rounded-lg">
-                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="bg-white/10 p-3 rounded-lg">
+                <svg class="w-6 h-6 text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                 </svg>
               </div>
               <div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">Email</h3>
-                <p class="text-gray-600">info@vkusnaya.company</p>
-                <p class="text-gray-600">reservation@vkusnaya.company</p>
+                <h3 class="text-lg font-semibold text-white mb-1">Email</h3>
+                <p class="text-gray-200/90">info@vkusnaya.company</p>
+                <p class="text-gray-200/90">reservation@vkusnaya.company</p>
               </div>
             </div>
 
             <!-- Часы работы -->
             <div class="flex items-start space-x-4">
-              <div class="bg-primary-100 p-3 rounded-lg">
-                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="bg-white/10 p-3 rounded-lg">
+                <svg class="w-6 h-6 text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
               </div>
               <div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">Часы работы</h3>
-                <div class="space-y-1 text-gray-600">
+                <h3 class="text-lg font-semibold text-white mb-1">Часы работы</h3>
+                <div class="space-y-1 text-gray-200/90">
                   <p>Пн-Чт: 11:00-23:00</p>
                   <p>Пт-Сб: 11:00-24:00</p>
                   <p>Воскресенье: 12:00-22:00</p>
@@ -78,7 +78,7 @@
 
           <!-- Социальные сети -->
           <div class="mt-8">
-            <h3 class="text-lg font-semibold text-gray-800 mb-4">Следите за нами</h3>
+          <h3 class="text-lg font-semibold text-white mb-4">Следите за нами</h3>
             <div class="flex space-x-4">
               <a href="#" class="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition-colors duration-300">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -101,50 +101,51 @@
 
         <!-- Форма обратной связи -->
         <div>
-          <h2 class="text-3xl font-playfair font-bold text-gray-800 mb-8">Свяжитесь с нами</h2>
+         <h2 v-split class="text-3xl font-playfair font-bold text-white mb-8">Свяжитесь с нами</h2>
           
-          <form @submit.prevent="submitForm" class="space-y-6">
+          <form @submit.prevent="submitForm" class="space-y-6" aria-labelledby="form-title">
+            <h2 id="form-title" class="sr-only">Форма обратной связи</h2>
             <div>
-              <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Имя *</label>
+              <label for="name" class="block text-sm font-medium text-gray-200 mb-2">Имя *</label>
               <input 
                 type="text" 
                 id="name" 
                 v-model="form.name"
                 required
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 transition-colors duration-300"
+                class="w-full px-4 py-3 border border-white/20 bg-white/5 text-white placeholder:text-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 transition-colors duration-300"
                 placeholder="Ваше имя"
               >
             </div>
 
             <div>
-              <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+              <label for="email" class="block text-sm font-medium text-gray-200 mb-2">Email *</label>
               <input 
                 type="email" 
                 id="email" 
                 v-model="form.email"
                 required
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 transition-colors duration-300"
+                class="w-full px-4 py-3 border border-white/20 bg-white/5 text-white placeholder:text-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 transition-colors duration-300"
                 placeholder="your@email.com"
               >
             </div>
 
             <div>
-              <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Телефон</label>
+              <label for="phone" class="block text-sm font-medium text-gray-200 mb-2">Телефон</label>
               <input 
                 type="tel" 
                 id="phone" 
                 v-model="form.phone"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 transition-colors duration-300"
+                class="w-full px-4 py-3 border border-white/20 bg-white/5 text-white placeholder:text-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 transition-colors duration-300"
                 placeholder="+7 (999) 123-45-67"
               >
             </div>
 
             <div>
-              <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Тема</label>
+              <label for="subject" class="block text-sm font-medium text-gray-200 mb-2">Тема</label>
               <select 
                 id="subject" 
                 v-model="form.subject"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 transition-colors duration-300"
+                class="w-full px-4 py-3 border border-white/20 bg-white/5 text-white rounded-lg focus:ring-primary-500 focus:border-primary-500 transition-colors duration-300"
               >
                 <option value="">Выберите тему</option>
                 <option value="reservation">Бронирование столика</option>
@@ -155,13 +156,13 @@
             </div>
 
             <div>
-              <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Сообщение *</label>
+              <label for="message" class="block text-sm font-medium text-gray-200 mb-2">Сообщение *</label>
               <textarea 
                 id="message" 
                 v-model="form.message"
                 required
                 rows="5"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 transition-colors duration-300"
+                class="w-full px-4 py-3 border border-white/20 bg-white/5 text-white placeholder:text-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 transition-colors duration-300"
                 placeholder="Ваше сообщение..."
               ></textarea>
             </div>
@@ -178,7 +179,7 @@
           <!-- Успешная отправка -->
           <div 
             v-if="showSuccess"
-            class="mt-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg"
+            class="mt-6 p-4 bg-white/10 border border-white/20 text-white rounded-lg"
           >
             <div class="flex items-center">
               <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -189,18 +190,43 @@
           </div>
         </div>
       </div>
+
+      <!-- Наши филиалы -->
+      <section class="mt-20" aria-labelledby="branches-title">
+        <h2 id="branches-title" class="text-3xl font-playfair font-bold text-white mb-8">Наши филиалы</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Филиал 1 -->
+          <div class="bg-white/5 backdrop-blur p-6 rounded-xl border border-white/10 text-white">
+            <h3 class="text-xl font-semibold mb-2">Садовая, 212Б</h3>
+            <p class="text-gray-300 mb-2">Тел.: <a href="tel:+79879552565" class="underline hover:text-primary-300">+7 (987) 955-25-65</a></p>
+            <p class="text-gray-300">Пн–Пт 08:00–21:00; Сб 08:30–21:00; Вс 09:00–21:00</p>
+          </div>
+          <!-- Филиал 2 -->
+          <div class="bg-white/5 backdrop-blur p-6 rounded-xl border border-white/10 text-white">
+            <h3 class="text-xl font-semibold mb-2">ул. Советской Армии, 177</h3>
+            <p class="text-gray-300 mb-2">Тел.: <a href="tel:+79171421574" class="underline hover:text-primary-300">+7 (917) 142-15-74</a></p>
+            <p class="text-gray-300">Пн–Ср 09:00–21:00; Чт 09:00–22:00; Пт, Сб 09:00–23:00; Вс 10:00–21:00</p>
+          </div>
+          <!-- Филиал 3 -->
+          <div class="bg-white/5 backdrop-blur p-6 rounded-xl border border-white/10 text-white">
+            <h3 class="text-xl font-semibold mb-2">Лесная ул., 33 (этаж 2)</h3>
+            <p class="text-gray-300 mb-2">Тел.: <a href="tel:+79679206535" class="underline hover:text-primary-300">+7 (967) 920-65-35</a></p>
+            <p class="text-gray-300">Ежедневно, 09:00–21:00</p>
+          </div>
+        </div>
+      </section>
     </div>
 
     <!-- Карта -->
-    <section class="bg-gray-100">
-      <div class="h-96 bg-gray-300 flex items-center justify-center">
-        <div class="text-center text-gray-600">
+    <section>
+      <div class="h-96 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center">
+        <div class="text-center text-gray-200">
           <svg class="w-12 h-12 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
           </svg>
           <p class="text-lg">Интерактивная карта</p>
-          <p class="text-sm">г. Москва, ул. Арбат, 15</p>
+          <p class="text-sm">г. Самара, ул. Советской Армии, 177</p>
         </div>
       </div>
     </section>
@@ -208,19 +234,19 @@
     <!-- Призыв к бронированию -->
     <section class="py-16 bg-primary-600 text-white">
       <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-playfair font-bold mb-6">
+        <h2 v-split class="text-3xl font-playfair font-bold mb-6">
           Готовы к незабываемому ужину?
         </h2>
-        <p class="text-lg mb-8">
+        <p v-split="{ types: 'words, chars', delayStep: 0.015 }" class="text-lg mb-8">
           Позвоните нам или забронируйте столик онлайн
         </p>
         <div class="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
-          <button class="btn-primary shadow-glow" @click="isReservationOpen.value = true">Забронировать онлайн</button>
-          <a 
-            href="tel:+74951234567"
+          <button v-split="{ types: 'words, chars', delayStep: 0.012, threshold: 0 }" class="btn-primary shadow-glow" @click="isReservationOpen.value = true">Забронировать онлайн</button>
+          <a v-split="{ types: 'words, chars', delayStep: 0.012, threshold: 0 }"
+            href="tel:+79171421574"
             class="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-3 px-8 rounded-lg transition-all duration-300 inline-block"
           >
-            Позвонить: +7 (495) 123-45-67
+            Позвонить: +7 (917) 142-15-74
           </a>
         </div>
       </div>
@@ -236,7 +262,7 @@ import { useReservationModal } from '@/composables/useReservationModal'
 useHead({
   title: 'Контакты — Вкусная компания',
   meta: [
-    { name: 'description', content: 'Свяжитесь с рестораном «Вкусная компания»: адрес, телефон, часы работы. Забронируйте столик по телефону +7 (495) 123-45-67 или через форму обратной связи.' }
+    { name: 'description', content: 'Свяжитесь с «Вкусной Компанией»: г. Самара, ул. Советской Армии, 177. Бронирование: +7 (917) 142-15-74 или через форму обратной связи.' }
   ]
 })
 
@@ -278,4 +304,84 @@ const submitForm = async () => {
     showSuccess.value = false
   }, 5000)
 }
+
+// Breadcrumbs and contact structured data
+const url = useRequestURL()
+const origin = `${url.protocol}//${url.host}`
+const organizationId = `${origin}/#organization`
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Главная', item: `${origin}/` },
+          { '@type': 'ListItem', position: 2, name: 'Контакты', item: `${origin}/contact` }
+        ]
+      })
+    },
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        '@id': organizationId,
+        contactPoint: [{
+          '@type': 'ContactPoint',
+          telephone: '+7-917-142-15-74',
+          contactType: 'customer service',
+          areaServed: 'RU',
+          availableLanguage: ['ru']
+        }]
+      })
+    },
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify([
+        {
+          '@context': 'https://schema.org',
+          '@type': 'Restaurant',
+          name: 'Вкусная компания — Садовая, 212Б',
+          branchOf: { '@id': organizationId },
+          telephone: '+7-987-955-25-65',
+          address: { '@type': 'PostalAddress', streetAddress: 'Садовая 212Б', addressLocality: '—' },
+          openingHoursSpecification: [
+            { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '08:00', closes: '21:00' },
+            { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Saturday'], opens: '08:30', closes: '21:00' },
+            { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Sunday'], opens: '09:00', closes: '21:00' }
+          ]
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'Restaurant',
+          name: 'Вкусная компания — ул. Советской Армии, 177',
+          branchOf: { '@id': organizationId },
+          telephone: '+7-917-142-15-74',
+          address: { '@type': 'PostalAddress', streetAddress: 'ул. Советской Армии, 177', addressLocality: '—' },
+          openingHoursSpecification: [
+            { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday'], opens: '09:00', closes: '21:00' },
+            { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Thursday'], opens: '09:00', closes: '22:00' },
+            { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Friday','Saturday'], opens: '09:00', closes: '23:00' },
+            { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Sunday'], opens: '10:00', closes: '21:00' }
+          ]
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'Restaurant',
+          name: 'Вкусная компания — Лесная ул., 33 (этаж 2)',
+          branchOf: { '@id': organizationId },
+          telephone: '+7-967-920-65-35',
+          address: { '@type': 'PostalAddress', streetAddress: 'Лесная ул., 33, этаж 2', addressLocality: '—' },
+          openingHoursSpecification: [
+            { '@type': 'OpeningHoursSpecification', dayOfWeek: [
+              'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'
+            ], opens: '09:00', closes: '21:00' }
+          ]
+        }
+      ])
+    }
+  ]
+})
 </script>

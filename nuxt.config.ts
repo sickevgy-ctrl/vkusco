@@ -17,7 +17,7 @@ export default defineNuxtConfig({
       inject: true
     }]
   ],
-  css: ['@/assets/css/main.css'],
+  css: ['@/assets/css/main.css', 'lenis/dist/lenis.css'],
   app: {
     head: {
       title: `${brand.name} — Ресторан изысканной кухни`,
@@ -25,6 +25,12 @@ export default defineNuxtConfig({
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: `${brand.name} — ресторан итальянской и европейской кухни. Забронируйте столик для незабываемого ужина.` }
+      ],
+      link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' },
+        { rel: 'icon', type: 'image/png', href: '/content/IMG_3306.PNG' },
+        { rel: 'apple-touch-icon', href: '/content/IMG_3306.PNG' },
+        { rel: 'mask-icon', href: '/logo.svg', color: brand.colors.primary }
       ]
     }
   }

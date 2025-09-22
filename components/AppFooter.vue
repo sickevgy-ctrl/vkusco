@@ -1,11 +1,11 @@
 <template>
-  <footer class="bg-gray-900 text-white">
+  <footer class="bg-transparent text-white">
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <!-- О ресторане -->
         <div class="col-span-1 md:col-span-2">
           <div class="flex items-center space-x-3 mb-4">
-            <img src="/logo.svg" alt="Вкусная компания" class="h-8 w-auto"/>
+            <img src="/content/IMG_3306.PNG" alt="Вкусная компания" class="h-8 w-auto"/>
             <h3 class="text-2xl font-playfair font-bold text-primary-400">Вкусная компания</h3>
           </div>
           <p class="text-gray-300 mb-4">
@@ -54,14 +54,14 @@
         <div>
           <h3 class="text-lg font-semibold text-primary-400 mb-4">Контакты</h3>
           <div class="space-y-2 text-gray-300">
-            <p>г. Москва, ул. Арбат, 15</p>
-            <p>+7 (495) 123-45-67</p>
+            <p>г. Самара, ул. Советской Армии, 177</p>
+            <p><a href="tel:+79171421574" class="underline hover:text-primary-300">+7 (917) 142-15-74</a></p>
             <p>info@vkusnaya.company</p>
           </div>
         </div>
       </div>
 
-      <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+  <div class="mt-8 pt-8 border-t border-white/10 text-center text-gray-300">
   <p>&copy; 2025 Вкусная компания. Все права защищены.</p>
       </div>
     </div>

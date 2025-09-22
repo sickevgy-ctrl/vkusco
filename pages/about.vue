@@ -1,141 +1,112 @@
 <template>
   <div>
     <!-- Заголовок -->
-    <section class="relative py-20 bg-gray-900 text-white overflow-hidden">
+    <section class="relative py-20 text-white overflow-hidden">
       <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"></div>
-      <div 
-        class="absolute inset-0 bg-cover bg-center"
-        style="background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')"
-      ></div>
+      <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2070&q=80')"></div>
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-4xl md:text-5xl font-playfair font-bold mb-4">О нас</h1>
-        <p class="text-xl text-gray-300">История, ценности и люди, которые делают «Вкусная компания» особенной</p>
+        <h1 v-split class="text-4xl md:text-5xl font-playfair font-bold mb-4">О нас</h1>
+        <p v-split="{ types: 'words, chars', delayStep: 0.02 }" class="text-xl text-gray-300">Семейный ресторан‑кондитерская с лучшими блюдами разных кухонь мира</p>
       </div>
     </section>
 
-    <!-- Наша история -->
-    <section class="py-20 bg-white">
+    <!-- О нас: кратко -->
+    <section class="py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div>
-            <h2 class="text-3xl md:text-4xl font-playfair font-bold text-gray-800 mb-6">
-              Наша история
-            </h2>
-            <p class="text-lg text-gray-600 mb-6">
-              «Вкусная компания» открыла свои двери в 2009 году с простой миссией — делиться 
-              лучшими гастрономическими впечатлениями в самом сердце Москвы. Мы выросли из любви к 
-              качественным продуктам, уважения к традициям и стремления делать каждый ужин особенным.
-            </p>
-            <p class="text-lg text-gray-600 mb-6">
-              Мы верим, что еда — это не просто топливо для тела, а способ объединять людей, 
-              создавать воспоминания и делиться культурой. Каждое блюдо в нашем ресторане 
-              готовится с любовью и вниманием к деталям.
-            </p>
-            <p class="text-lg text-gray-600">
-              За 15 лет работы мы стали не просто рестораном, а местом, где встречаются 
-              семьи, празднуют важные события и создают новые дружеские связи.
-            </p>
+            <h2 class="text-3xl md:text-4xl font-playfair font-bold text-white mb-6">Вкусная Компания — о заботе и честности</h2>
+            <p class="text-lg text-gray-200/90 mb-6">Не важно, какой у вас день и чем вы занимаетесь — у нас вы можете расслабиться и просто быть собой. Каждому гостю мы дарим улыбку, заботу и качественный продукт. Это вкусная еда в любой компании: с друзьями, родителями, детьми, партнёрами и даже с собой наедине.</p>
+            <p class="text-lg text-gray-200/90">В ресторане есть детская зона, чтобы родители могли отдохнуть за чашкой кофе. По выходным мы проводим семейные и детские мастер‑классы — ваш досуг будет не только вкусным, но и интересным.</p>
           </div>
           <div class="space-y-4">
-            <img 
-              src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-              alt="Интерьер ресторана"
-              class="rounded-lg shadow-lg"
-            >
-            <img 
-              src="https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-              alt="Кухня ресторана"
-              class="rounded-lg shadow-lg"
-            >
+            <img src="https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?auto=format&fit=crop&w=900&q=80" alt="Кондитерская витрина" class="rounded-lg shadow-lg">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" alt="Семейная атмосфера" class="rounded-lg shadow-lg">
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Наша команда -->
-    <section class="py-20 bg-gray-50">
+    <!-- Фишки заведения -->
+    <section class="py-16" aria-labelledby="features-title">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="section-title">Наша команда</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div 
-            v-for="member in team" 
-            :key="member.id"
-            class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-          >
-            <img 
-              :src="member.photo" 
-              :alt="member.name"
-              class="w-full h-64 object-cover"
-            >
-            <div class="p-6">
-              <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ member.name }}</h3>
-              <p class="text-primary-600 font-medium mb-3">{{ member.position }}</p>
-              <p class="text-gray-600">{{ member.description }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Наши ценности -->
-    <section class="py-20 bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="section-title">Наши ценности</h2>
+        <h2 id="features-title" class="section-title">Фишки заведения</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div 
-            v-for="value in values" 
-            :key="value.id"
-            class="text-center"
-          >
-            <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
-                <path :d="value.icon"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-semibold text-gray-800 mb-3">{{ value.title }}</h3>
-            <p class="text-gray-600">{{ value.description }}</p>
+          <div class="bg-white/5 backdrop-blur p-6 rounded-xl border border-white/10 text-white">
+            <h3 class="text-xl font-semibold mb-2">Большая кондитерская зона</h3>
+            <p class="text-gray-300">Мы начинали как кондитерская, поэтому сохранили большую витрину с премиальными десертами и тортами.</p>
+          </div>
+          <div class="bg-white/5 backdrop-blur p-6 rounded-xl border border-white/10 text-white">
+            <h3 class="text-xl font-semibold mb-2">Вечера разных культур</h3>
+            <p class="text-gray-300">Раз в месяц — музыкальные вечера разных культур: атмосфера праздника для свиданий и встреч с друзьями.</p>
+          </div>
+          <div class="bg-white/5 backdrop-blur p-6 rounded-xl border border-white/10 text-white">
+            <h3 class="text-xl font-semibold mb-2">Детская зона</h3>
+            <p class="text-gray-300">Комфортно всей семье: детская зона, пока вы общаетесь и наслаждаетесь ужином.</p>
+          </div>
+          <div class="bg-white/5 backdrop-blur p-6 rounded-xl border border-white/10 text-white">
+            <h3 class="text-xl font-semibold mb-2">Мастер‑классы для всей семьи</h3>
+            <p class="text-gray-300">Девичники, детские и семейные мастер‑классы, лекции и встречи с профессионалами.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Награды и признание -->
-    <section class="py-20 bg-gray-50">
+    <!-- История бренда -->
+    <section class="py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="section-title">Награды и признание</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div 
-            v-for="award in awards" 
-            :key="award.id"
-            class="bg-white p-6 rounded-lg shadow-lg text-center"
-          >
-            <div class="text-4xl mb-4">{{ award.icon }}</div>
-            <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ award.title }}</h3>
-            <p class="text-gray-600 text-sm">{{ award.year }}</p>
-          </div>
+        <h2 class="section-title">История создания «Вкусной Компании»</h2>
+        <div class="prose prose-invert max-w-none text-gray-200/90">
+          <p>В 2020 году, во время рождественского путешествия в Дюссельдорф, основательница «Вкусной Компании» Екатерина Александровна посетила камерный ресторанчик с тёплой семейной атмосферой. Пространство было наполнено смехом и ароматом свежей выпечки. Именно этот островок тепла захотелось привезти в Самару.</p>
+          <p>Через полтора месяца открылась первая кондитерская «Вкусная Компания» с двумя залами — европейской кухней и витринами десертов. Уже более трёх лет мы создаём «островки» уюта и радости для наших гостей.</p>
         </div>
       </div>
     </section>
 
-    <!-- Призыв к действию -->
+    <!-- Философия: 5 принципов -->
+    <section class="py-16" aria-labelledby="philosophy-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 id="philosophy-title" class="section-title">5 принципов нашей философии</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+          <div class="bg-white/5 backdrop-blur p-5 rounded-xl border border-white/10"><h3 class="font-semibold text-white mb-2">Открытость</h3><p class="text-gray-300">Мы рады идеям и обратной связи. Политика открытых дверей.</p></div>
+          <div class="bg-white/5 backdrop-blur p-5 rounded-xl border border-white/10"><h3 class="font-semibold text-white mb-2">Развитие</h3><p class="text-gray-300">Развиваем сеть, партнёрства и продукт, идём в коллаборации.</p></div>
+          <div class="bg-white/5 backdrop-blur p-5 rounded-xl border border-white/10"><h3 class="font-semibold text-white mb-2">Качество</h3><p class="text-gray-300">Честный состав блюд, индивидуальный сервис и вовлечённость.</p></div>
+          <div class="bg-white/5 backdrop-blur p-5 rounded-xl border border-white/10"><h3 class="font-semibold text-white mb-2">Искренность</h3><p class="text-gray-300">Честные отношения с гостями, сотрудниками и партнёрами.</p></div>
+          <div class="bg-white/5 backdrop-blur p-5 rounded-xl border border-white/10"><h3 class="font-semibold text-white mb-2">Уважение</h3><p class="text-gray-300">Уважаем каждого гостя, независимо от возраста и взглядов.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Архетип и позиционирование -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="section-title">Архетип и позиционирование</h2>
+        <p class="text-lg text-gray-200/90 mb-6">Вкусная Компания — заботливый исследователь: сервис, открытость, уют, тепло, забота и честность. Мы не консервативны — помогаем открывать лучшие стороны жизни, расширять горизонты и наполнять дни новыми эмоциями.</p>
+        <p class="text-lg text-gray-200/90">Наш образ — опытный и ответственный наставник. С нами безопасно и честно: мы создаём лучшее всей командой для вас и ваших детей.</p>
+      </div>
+    </section>
+
+    <!-- Правила команды -->
+    <section class="py-16" aria-labelledby="team-rules-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 id="team-rules-title" class="section-title">Правила нашей команды</h2>
+        <ul class="space-y-4 text-gray-200/90 list-disc pl-5">
+          <li><strong>Честность и открытость.</strong> Конфликты решаем обсуждением. Ложь и воровство недопустимы.</li>
+          <li><strong>Забота о госте.</strong> Отдаём качественные блюда, идём на компромисс, чтобы каждый уходил счастливым.</li>
+          <li><strong>Развитие и обучение.</strong> Растём, обучаемся, повышаем компетенции.</li>
+          <li><strong>Открытость к новому.</strong> Обновляем меню и витрины, рассказываем гостям о составе и сочетаниях.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CTA -->
     <section class="py-16 bg-primary-600 text-white">
       <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-playfair font-bold mb-6">
-          Готовы стать частью нашей истории?
-        </h2>
-        <p class="text-lg mb-8">
-          Забронируйте столик и ощутите наше гостеприимство
-        </p>
+        <h2 v-split class="text-3xl font-playfair font-bold mb-6">Приходите к нам</h2>
+        <p class="text-lg mb-8">ул. Советской Армии, 177 — проведите время с близкими и почувствуйте, как легко двигаться к новым вершинам!</p>
         <div class="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
-          <button class="btn-primary shadow-glow" @click="isReservationOpen.value = true">
-            Забронировать столик
-          </button>
-          <NuxtLink 
-            to="/contact" 
-            class="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-3 px-8 rounded-lg transition-all duration-300 inline-block"
-          >
-            Связаться с нами
-          </NuxtLink>
+          <button class="btn-primary shadow-glow" @click="isReservationOpen.value = true">Забронировать столик</button>
+          <NuxtLink to="/contact" class="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-3 px-8 rounded-lg transition-all duration-300 inline-block">Контакты</NuxtLink>
         </div>
       </div>
     </section>
@@ -148,93 +119,32 @@ import { useReservationModal } from '@/composables/useReservationModal'
 
 // SEO
 useHead({
-  title: 'О нас — Вкусная компания',
+  title: 'О нас — Вкусная Компания',
   meta: [
-    { name: 'description', content: 'Узнайте историю ресторана «Вкусная компания», познакомьтесь с нашей командой и ценностями. Уже 15 лет создаём тёплые гастрономические впечатления в Москве.' }
+    { name: 'description', content: 'Семейный ресторан‑кондитерская: уют, честность и вкус. Детская зона, семейные мастер‑классы и лучшие блюда разных кухонь мира.' }
   ]
 })
 
 // Глобальное состояние модального окна бронирования
 const { isReservationOpen } = useReservationModal()
+// Статические секции — без динамических списков на этой странице
 
-// Команда
-const team = ref([
-  {
-    id: 1,
-    name: 'Антонио Росси',
-    position: 'Основатель и шеф-повар',
-    description: 'Уроженец Тосканы с 25-летним опытом в кулинарии. Создал концепцию ресторана.',
-    photo: 'https://images.unsplash.com/photo-1583394293214-28ded15ee548?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
-  },
-  {
-    id: 2,
-    name: 'Мария Бианки',
-    position: 'Су-шеф',
-    description: 'Специалист по пасте и ризотто. Обучалась в кулинарной школе в Болонье.',
-    photo: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
-  },
-  {
-    id: 3,
-    name: 'Лука Верди',
-    position: 'Сомелье',
-    description: 'Эксперт по итальянским винам с международной сертификацией.',
-    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
-  }
-])
-
-// Ценности
-const values = ref([
-  {
-    id: 1,
-    title: 'Качество',
-    description: 'Только лучшие ингредиенты и проверенные поставщики',
-    icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
-  },
-  {
-    id: 2,
-    title: 'Традиции',
-    description: 'Аутентичные рецепты, передаваемые из поколения в поколение',
-    icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253'
-  },
-  {
-    id: 3,
-    title: 'Гостеприимство',
-    description: 'Каждый гость для нас - часть большой итальянской семьи',
-    icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z'
-  },
-  {
-    id: 4,
-    title: 'Инновации',
-    description: 'Современные техники приготовления с сохранением классического вкуса',
-    icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z'
-  }
-])
-
-// Награды
-const awards = ref([
-  {
-    id: 1,
-    title: 'Лучший итальянский ресторан',
-    year: '2023',
-    icon: '🏆'
-  },
-  {
-    id: 2,
-    title: 'Премия за качество сервиса',
-    year: '2022',
-    icon: '⭐'
-  },
-  {
-    id: 3,
-    title: 'Ресторан года',
-    year: '2021',
-    icon: '🥇'
-  },
-  {
-    id: 4,
-    title: 'Лучшая винная карта',
-    year: '2020',
-    icon: '🍷'
-  }
-])
+// Breadcrumbs JSON-LD
+const url = useRequestURL()
+const origin = `${url.protocol}//${url.host}`
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Главная', item: `${origin}/` },
+          { '@type': 'ListItem', position: 2, name: 'О нас', item: `${origin}/about` }
+        ]
+      })
+    }
+  ]
+})
 </script>

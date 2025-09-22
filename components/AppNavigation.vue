@@ -1,12 +1,11 @@
 <template>
-  <nav class="glass bg-white/70 backdrop-blur shadow-lg border-b border-white/30 sticky top-0 z-50">
+  <nav class="glass bg-black/20 backdrop-blur shadow-lg border-b border-white/10 fixed top-0 left-0 right-0 w-full z-50 text-white" aria-label="Основная навигация">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
+  <div class="flex justify-between items-center h-16">
         <!-- Логотип -->
-        <div class="flex-shrink-0 flex items-center space-x-3">
-          <NuxtLink to="/" class="flex items-center space-x-3">
-            <img src="/logo.svg" alt="Вкусная компания" class="h-8 w-auto"/>
-            <span class="text-2xl font-playfair font-bold text-primary-600">Вкусная компания</span>
+        <div class="flex-shrink-0 flex items-center">
+          <NuxtLink to="/" class="flex items-center">
+            <img src="/content/IMG_3306.PNG" alt="Логотип" class="h-14 w-auto"/>
           </NuxtLink>
         </div>
 
@@ -17,8 +16,8 @@
               v-for="item in navigation" 
               :key="item.name"
               :to="item.href"
-              class="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300"
-              active-class="text-primary-600 font-semibold"
+              class="text-gray-200 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300"
+              active-class="text-white font-semibold"
             >
               {{ item.name }}
             </NuxtLink>
@@ -35,7 +34,7 @@
         <div class="md:hidden">
           <button 
             @click="isOpen = !isOpen"
-            class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-600"
+            class="inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-600"
           >
             <svg 
               class="h-6 w-6" 
@@ -62,13 +61,13 @@
 
     <!-- Мобильная панель -->
     <div class="md:hidden" :class="{ 'block': isOpen, 'hidden': !isOpen }">
-  <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/90 backdrop-blur shadow-lg">
+  <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/40 backdrop-blur shadow-lg text-white">
         <NuxtLink 
           v-for="item in navigation" 
           :key="item.name"
           :to="item.href"
-          class="text-gray-700 hover:text-primary-600 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300"
-          active-class="text-primary-600 font-semibold"
+          class="text-gray-200 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300"
+          active-class="text-white font-semibold"
           @click="isOpen = false"
         >
           {{ item.name }}

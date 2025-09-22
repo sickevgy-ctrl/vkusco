@@ -14,9 +14,14 @@
     --brand-accent:#6F8F4B;
     --brand-surface:#FFFFFF;
     --brand-muted:#F3F4F6;
+    --brand-beige:#F5F0E6;
     --brand-radius-md:12px;
     --brand-radius-lg:16px;
     --brand-radius-xl:20px;
+  }
+  body {
+    background-color: var(--brand-primary-700);
+    color: #e5e7eb; /* light gray for readability on dark bg */
   }
   
   .font-playfair {
@@ -25,8 +30,80 @@
 }
 
 @layer components {
+  /* Section theme swap helper */
+  .theme-swap {
+    transition: background-color 600ms ease, color 600ms ease;
+  }
+  .theme-swap.is-active {
+    background-color: var(--brand-beige);
+    color: var(--brand-primary-700);
+  }
+  .theme-swap.is-active .section-title {
+    color: var(--brand-primary-700);
+  }
+  .theme-swap.is-active .dish-card {
+    background-color: #ffffff !important;
+    border-color: #e5e7eb !important; /* gray-200 */
+    backdrop-filter: none !important;
+  }
+  .theme-swap.is-active .dish-card *,
+  .theme-swap.is-active .dish-card a {
+    color: var(--brand-primary-700) !important;
+  }
+  .theme-swap.is-active .dish-card .price {
+    color: var(--brand-primary) !important;
+  }
+  /* Review cards on beige */
+  .theme-swap.is-active .review-card {
+    background-color: #ffffff !important;
+    border-color: #e5e7eb !important;
+    color: var(--brand-primary-700) !important;
+  }
+  .theme-swap.is-active .review-card * {
+    color: var(--brand-primary-700) !important;
+  }
+  /* SplitType base */
+  .split-target { font-kerning: none; }
+  .split-char { display:inline-block; opacity:0; transform: translateY(12px); }
+  .split-word { display:inline-block; }
+  @keyframes split-rise { to { opacity:1; transform: translateY(0); } }
+  .split-in .split-char { animation: split-rise .6s ease-out both; }
+  /* Hover wave for buttons/titles (optional) */
+  .split-hover:hover .split-char { transform: translateY(-2px); transition: transform .2s ease; }
+
+  /* Simple keyframes */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes blob {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(10px, -8px) scale(1.05); }
+    66% { transform: translate(-10px, 6px) scale(0.98); }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .animate-fade-in-up { animation: fadeInUp .8s ease-out both; }
+  .animate-blob { animation: blob 12s ease-in-out infinite; }
+
+  /* Radial subtle background used on hero */
+  .bg-radial-faded {
+    background: radial-gradient(1000px 500px at 50% 0%, rgba(255,255,255,0.06), transparent 60%);
+  }
+
+  /* Shadows */
+  .shadow-elegant { box-shadow: 0 10px 30px -10px rgba(0,0,0,0.25); }
+  .shadow-glow { box-shadow: 0 0 0 3px rgba(58, 79, 46, 0.15), 0 15px 40px -15px rgba(58, 79, 46, 0.5); }
+
+  /* Initial states for gsap */
+  .reveal-up { opacity: 0; transform: translateY(24px); }
+  .reveal-fade { opacity: 0; }
+
   .btn-primary {
-    background-color: var(--brand-primary);
+    background-color: var(--brand-accent);
     color: white;
     font-weight: 600;
     padding: 0.75rem 1.5rem;
@@ -39,13 +116,13 @@
   }
   
   .btn-primary:hover {
-    background-color: var(--brand-primary-700);
+    background-color: var(--brand-primary);
   }
   
   .btn-secondary {
     background-color: transparent;
-    border: 2px solid var(--brand-primary);
-    color: var(--brand-primary);
+    border: 2px solid var(--brand-accent);
+    color: var(--brand-accent);
     font-weight: 600;
     padding: 0.75rem 1.5rem;
     border-radius: var(--brand-radius-lg);
@@ -56,7 +133,7 @@
   }
   
   .btn-secondary:hover {
-    background-color: var(--brand-primary);
+    background-color: var(--brand-accent);
     color: white;
   }
   
@@ -64,7 +141,7 @@
     font-size: 2.25rem;
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    color: #1f2937;
+    color: var(--brand-surface);
     text-align: center;
     margin-bottom: 3rem;
   }
@@ -72,7 +149,7 @@
   @media (min-width: 768px) {
   /* Gradient text */
   .gradient-text {
-    background: linear-gradient(90deg, rgba(58,79,46,0.95), rgba(111,143,75,0.95), rgba(58,79,46,0.85));
+    background: linear-gradient(90deg, rgba(111,143,75,0.95), rgba(58,79,46,0.95));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
