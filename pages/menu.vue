@@ -1,84 +1,34 @@
 <template>
   <div>
-    <!-- Заголовок страницы -->
-  <section class="text-white py-24 relative overflow-hidden">
-      <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_20%,var(--brand-primary),transparent_40%),radial-gradient(circle_at_80%_70%,#ef4444,transparent_40%)]"></div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-  <h1 v-split class="text-5xl md:text-6xl font-playfair font-bold mb-4">Наше меню</h1>
-  <p v-split="{ types: 'words, chars', delayStep: 0.02 }" class="text-2xl text-gray-300">Изысканные блюда итальянской и европейской кухни</p>
-      </div>
-    </section>
-
-    <!-- Фильтр категорий -->
-  <section class="bg-white/10 backdrop-blur border-b border-white/10 sticky top-16 z-40">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex overflow-x-auto py-4 space-x-4 no-scrollbar">
-          <button
-            v-for="category in categories"
-            :key="category.id"
-            @click="selectedCategory = category.id"
-            :class="[
-              'flex-shrink-0 px-6 py-3 rounded-full font-medium transition-all duration-300 border',
-              selectedCategory === category.id
-                ? 'bg-primary-600 text-white border-primary-600 shadow-glow'
-                : 'bg-white/10 text-gray-200 border-white/10 hover:border-primary-300 hover:text-white hover:bg-white/15'
-            ]"
-          >
-            {{ category.name }}
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Меню -->
-  <section class="py-12">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="space-y-12">
-          <div 
-            v-for="category in filteredCategories" 
-            :key="category.id"
-            class="bg-white/5 backdrop-blur rounded-2xl shadow-elegant p-8 border border-white/10"
-          >
-            <h2 v-split class="text-3xl font-playfair font-bold text-white mb-8 text-center">
+    <!-- Меню: горизонтальная прокрутка -->
+  <section ref="menuSection" :class="['relative pt-[4.5rem] transition-colors duration-300', isBeige ? 'text-gray-900' : 'text-white', { 'bg-beige': isBeige }]">
+      <!-- Desktop: GSAP horizontal scroll (pinned). Mobile: native horizontal scroll with snap. -->
+      <div 
+        ref="menuTrack"
+  class="menu-track flex gap-4 lg:gap-6 overflow-x-auto lg:overflow-visible no-scrollbar"
+      >
+        <div 
+          v-for="category in menuData" 
+          :key="category.id"
+          class="panel w-[88vw] sm:w-[92vw] lg:w-screen flex-shrink-0"
+        >
+          <div class="min-h-[calc(100vh-9rem)] flex flex-col bg-white/5 backdrop-blur rounded-2xl shadow-elegant p-6 sm:p-8 border border-white/10">
+            <h2 :class="['text-2xl md:text-3xl font-playfair font-bold mb-6 text-center', isBeige ? 'text-gray-900' : 'text-white']">
               {{ category.name }}
             </h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div 
-                v-for="dish in category.dishes" 
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+              <div
+                v-for="dish in category.dishes"
                 :key="dish.id"
                 class="group cursor-pointer"
                 @click="openDishModal(dish)"
               >
-                <div class="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/5 transition-all duration-300 hover:-translate-y-[1px]">
-                  <img 
-                    :src="dish.image" 
-                    :alt="dish.name"
-                    class="w-20 h-20 object-cover rounded-lg flex-shrink-0"
-                  >
+                <div class="flex items-start space-x-4 p-4 rounded-2xl bg-white/5 backdrop-blur border border-white/10 hover:bg-white/10 transition-all duration-300 hover:-translate-y-[1px] overflow-hidden">
+                  <img :src="dish.image" :alt="dish.name" loading="lazy" decoding="async" class="w-16 h-16 sm:w-20 sm:h-20 md:w-20 md:h-20 aspect-square object-cover rounded-lg flex-shrink-0 self-start" />
                   <div class="flex-1 min-w-0">
-                    <div class="flex justify-between items-start mb-2">
-                      <h3 class="text-lg font-semibold text-white group-hover:text-primary-300 transition-colors duration-300">
-                        {{ dish.name }}
-                      </h3>
-                      <span class="text-lg font-bold text-primary-300 ml-4">
-                        {{ dish.price }} ₽
-                      </span>
-                    </div>
-                    <p class="text-gray-200/85 text-sm mb-2">{{ dish.description }}</p>
-                    <div class="flex flex-wrap gap-2">
-                      <span 
-                        v-for="ingredient in dish.ingredients?.slice(0, 3)" 
-                        :key="ingredient"
-                        class="text-xs bg-white/10 text-white px-2 py-1 rounded-full border border-white/10"
-                      >
-                        {{ ingredient }}
-                      </span>
-                      <span 
-                        v-if="dish.ingredients?.length > 3"
-                        class="text-xs text-gray-300"
-                      >
-                        +{{ dish.ingredients.length - 3 }}
-                      </span>
+                    <div class="flex justify-between items-center">
+                      <h3 :class="['text-lg font-semibold group-hover:text-primary-300 transition-colors duration-300 truncate', isBeige ? 'text-gray-900' : 'text-white']">{{ dish.name }}</h3>
+                      <span class="text-lg font-bold text-primary-300 ml-4 whitespace-nowrap">{{ dish.price }} ₽</span>
                     </div>
                   </div>
                 </div>
@@ -163,8 +113,9 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useReservationModal } from '@/composables/useReservationModal'
+const { $gsap, $ScrollTrigger } = useNuxtApp()
 
 // SEO
 useHead({
@@ -177,19 +128,11 @@ useHead({
 // Глобальное состояние модального окна бронирования
 const { isReservationOpen } = useReservationModal()
 
-const selectedCategory = ref('all')
 const selectedDish = ref(null)
-
-// Категории меню
-const categories = ref([
-  { id: 'all', name: 'Все блюда' },
-  { id: 'appetizers', name: 'Закуски' },
-  { id: 'pasta', name: 'Паста' },
-  { id: 'pizza', name: 'Пицца' },
-  { id: 'main', name: 'Основные блюда' },
-  { id: 'desserts', name: 'Десерты' },
-  { id: 'drinks', name: 'Напитки' }
-])
+const isBeige = ref(false)
+const menuSection = ref(null)
+const menuTrack = ref(null)
+const cleanupTriggers = []
 
 // Меню
 const menuData = ref([
@@ -375,12 +318,79 @@ const menuData = ref([
   }
 ])
 
-// Фильтрованные категории
-const filteredCategories = computed(() => {
-  if (selectedCategory.value === 'all') {
-    return menuData.value
+// GSAP horizontal scroll on desktop; native swipe on mobile
+let tween = null
+onMounted(() => {
+  $ScrollTrigger?.matchMedia({
+    '(min-width: 1024px)': () => {
+      const track = menuTrack.value
+      const section = menuSection.value
+      if (!track || !section) return
+
+      const update = () => Math.max(0, track.scrollWidth - window.innerWidth)
+      // Create tween that moves the track horizontally while page scrolls
+      tween = $gsap.to(track, {
+        x: () => -(track.scrollWidth - window.innerWidth),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: () => `+=${update()}`,
+          scrub: true,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true
+        }
+      })
+
+      // Toggle beige background on 3rd panel (index 2)
+      const panels = track.querySelectorAll('.panel')
+      const third = panels[2]
+      if (third) {
+        const trig = $ScrollTrigger.create({
+          trigger: third,
+          containerAnimation: tween,
+          start: 'left center',
+          end: 'right center',
+          onEnter: () => { isBeige.value = true },
+          onEnterBack: () => { isBeige.value = true },
+          onLeave: () => { isBeige.value = false },
+          onLeaveBack: () => { isBeige.value = false }
+        })
+        // store for cleanup
+        cleanupTriggers.push(trig)
+      }
+    },
+    '(max-width: 1023px)': () => {
+      // mobile: native horizontal scroll; use ScrollTrigger with horizontal tracking on the track scroller
+      const track = menuTrack.value
+      if (!track) return
+      const panels = track.querySelectorAll('.panel')
+      const third = panels[2]
+      if (third) {
+        const trig = $ScrollTrigger.create({
+          trigger: third,
+          scroller: track,
+          horizontal: true,
+          start: 'left center',
+          end: 'right center',
+          onEnter: () => { isBeige.value = true },
+          onEnterBack: () => { isBeige.value = true },
+          onLeave: () => { isBeige.value = false },
+          onLeaveBack: () => { isBeige.value = false }
+        })
+        cleanupTriggers.push(trig)
+      }
+    }
+  })
+})
+
+onBeforeUnmount(() => {
+  cleanupTriggers.forEach(t => t?.kill && t.kill())
+  if (tween && tween.scrollTrigger) {
+    tween.scrollTrigger.kill()
   }
-  return menuData.value.filter(category => category.id === selectedCategory.value)
+  tween = null
 })
 
 // Функции для модального окна
@@ -453,5 +463,15 @@ useHead(() => ({
 }
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+/* Scroll snap for mobile */
+.menu-track {
+  scroll-snap-type: x mandatory;
+}
+.panel {
+  scroll-snap-align: start;
+}
+.bg-beige {
+  background-color: #f4ead7; /* мягкий бежевый */
 }
 </style>

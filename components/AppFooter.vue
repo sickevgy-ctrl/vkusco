@@ -5,7 +5,11 @@
         <!-- О ресторане -->
         <div class="col-span-1 md:col-span-2">
           <div class="flex items-center space-x-3 mb-4">
-            <img src="/content/IMG_3306.PNG" alt="Вкусная компания" class="h-8 w-auto"/>
+            <picture>
+              <source srcset="/content/IMG_3306.PNG.avif" type="image/avif" />
+              <source srcset="/content/IMG_3306.PNG.webp" type="image/webp" />
+              <img src="/content/IMG_3306.PNG" alt="Вкусная компания" class="h-8 w-auto"/>
+            </picture>
             <h3 class="text-2xl font-playfair font-bold text-primary-400">Вкусная компания</h3>
           </div>
           <p class="text-gray-300 mb-4">

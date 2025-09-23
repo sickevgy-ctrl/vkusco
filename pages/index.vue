@@ -1,16 +1,17 @@
 <template>
-  <div>
+  <div style="background-color: var(--brand-primary-700);">
     <!-- Героя секция -->
-    <section ref="hero" class="relative h-screen flex items-center justify-center overflow-hidden bg-radial-faded">
+    <section ref="hero" class="relative h-screen flex items-center justify-center overflow-hidden bg-radial-faded" style="background-color: var(--brand-primary-700);">
       <!-- Фоновое изображение -->
       <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30 z-10"></div>
       <!-- Animated blobs -->
   <div class="absolute -top-24 -left-24 w-72 h-72 bg-primary-500/30 rounded-full blur-3xl animate-blob"></div>
   <div class="absolute -bottom-24 -right-24 w-72 h-72 bg-primary-600/25 rounded-full blur-3xl animate-blob [animation-delay:2s]"></div>
-      <div 
-        class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style="background-image: url('/images/IMG_5217.JPG')"
-      ></div>
+      <picture class="absolute inset-0 block">
+        <source srcset="/images/IMG_5217.JPG.avif" type="image/avif" />
+        <source srcset="/images/IMG_5217.JPG.webp" type="image/webp" />
+        <img src="/images/IMG_5217.JPG" alt="Фон ресторана" class="w-full h-full object-cover" />
+      </picture>
 
       <!-- Декоративные растения (SVG) -->
       <svg ref="plantLeft" class="absolute left-0 bottom-0 h-64 w-auto z-20 opacity-0" viewBox="0 0 120 240" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,13 +25,13 @@
       
       <!-- Контент -->
       <div ref="heroContent" class="relative z-20 text-center text-white px-4 sm:px-6 lg:px-8">
-        <h1 v-split="{ types: 'words, chars', delayStep: 0.03 }" class="text-4xl md:text-6xl lg:text-7xl font-playfair font-bold mb-6 drop-shadow-glow tracking-tight">
+        <h1 v-split="{ types: 'words, chars', delayStep: 0.03 }" class="text-4xl md:text-6xl lg:text-7xl font-playfair font-bold mb-6 drop-shadow-glow tracking-tight opacity-0 transform translate-y-10">
           Семейный ресторан‑кондитерская
         </h1>
-        <p v-split="{ types: 'words, chars', delayStep: 0.02 }" class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto text-white/90">
+        <p v-split="{ types: 'words, chars', delayStep: 0.02 }" class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto text-white/90 opacity-0 transform translate-y-8">
           С лучшими блюдами разных кухонь мира. Переходи на новый уровень — выбирай лучшее. Вкусная еда в хорошей компании.
         </p>
-        <div class="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
+        <div class="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center opacity-0 transform translate-y-6">
           <button v-split="{ types: 'words, chars', delayStep: 0.015, threshold: 0 }" class="btn-primary text-lg px-10 py-5 shadow-glow" @click="isReservationOpen.value = true">
             Забронировать столик
           </button>
@@ -48,13 +49,21 @@
       </div>
     </section>
 
-    <!-- О ресторане -->
-  <section class="py-20 relative" aria-labelledby="about-title">
+  <!-- Секция с блюдом -->
+  <HeroDishTw
+    class="block"
+    :title="`ПИТАНИЕ\nПОЛЕЗНЕЕ\nПРАВИЛЬНОГО`"
+    :lead="`Мы слишком долго и усердно трудимся \nнад тем что бы вы были здоровы \nи при этом ели привычную и вкусную еду.`"
+    imgSrc="/images/20250922_1637_Блюдо в нижнем углу_remix_01k5rt47fdfd4rgxhh1mydfcr4.avif"
+  />
+
+  <!-- О ресторане -->
+  <section class="py-20 relative" aria-labelledby="about-title" style="background-color: var(--brand-primary-700);">
       <div class="absolute inset-0 bg-grid bg-[length:32px_32px] opacity-30 pointer-events-none"></div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 id="about-title" class="text-3xl md:text-4xl font-playfair font-bold text-white mb-6">
+            <h2 id="about-title" class="text-3xl md:text-4xl font-playfair font-bold text-white mb-6 opacity-0 transform translate-y-10">
               О нас
             </h2>
             <p class="text-lg text-gray-200/90 mb-6">
@@ -81,21 +90,22 @@
       </div>
     </section>
 
-    <!-- Бейдж-группа: Популярные блюда + Атмосфера + Отзывы (единый бежевый фон) -->
-    <div ref="beigeGroup" class="theme-swap" aria-live="polite">
+  <!-- Блоки контента (фон остаётся слитным по всей странице) -->
+  <div aria-live="polite" style="background-color: var(--brand-primary-700);">
       <!-- Популярные блюда -->
-      <section ref="popularSection" class="py-20" aria-labelledby="popular-title">
+      <section ref="popularSection" class="py-20" aria-labelledby="popular-title" style="background-color: var(--brand-primary-700);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 id="popular-title" v-split class="section-title">Популярные блюда</h2>
+          <h2 id="popular-title" v-split class="section-title opacity-0 transform translate-y-10">Популярные блюда</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div 
               v-for="dish in popularDishes" 
               :key="dish.id"
-              class="dish-card bg-white/5 backdrop-blur rounded-2xl shadow-elegant overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-white/10"
+              class="dish-card bg-white/5 backdrop-blur rounded-2xl shadow-elegant overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-white/10 opacity-0 transform translate-y-12"
             >
               <img 
                 :src="dish.image" 
                 :alt="dish.name"
+                loading="lazy" decoding="async"
                 class="w-full h-48 object-cover"
               >
               <div class="p-6">
@@ -117,9 +127,9 @@
       </section>
 
       <!-- Атмосфера -->
-      <section class="py-20" aria-labelledby="atmosphere-title">
+      <section class="py-20" aria-labelledby="atmosphere-title" style="background-color: var(--brand-primary-700);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 id="atmosphere-title" v-split class="section-title">Наша атмосфера</h2>
+          <h2 id="atmosphere-title" v-split class="section-title opacity-0 transform translate-y-10">Наша атмосфера</h2>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div
               v-for="(img, idx) in atmosphereImages"
@@ -129,6 +139,7 @@
               <img
                 :src="img.src"
                 :alt="img.alt"
+                loading="lazy" decoding="async"
                 class="w-full h-48 md:h-56 object-cover transform transition-transform duration-300 group-hover:scale-105"
               />
               <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300"></div>
@@ -138,14 +149,14 @@
       </section>
 
       <!-- Отзывы -->
-      <section class="py-20" aria-labelledby="reviews-title">
+      <section class="py-20" aria-labelledby="reviews-title" style="background-color: var(--brand-primary-700);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 id="reviews-title" v-split class="section-title">Что говорят о нас</h2>
+          <h2 id="reviews-title" v-split class="section-title opacity-0 transform translate-y-10">Что говорят о нас</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div 
               v-for="review in reviews" 
               :key="review.id"
-              class="review-card bg-white/5 backdrop-blur p-6 rounded-lg shadow-lg border border-white/10"
+              class="review-card bg-white/5 backdrop-blur p-6 rounded-lg shadow-lg border border-white/10 opacity-0 transform translate-y-12"
             >
               <div class="flex items-center mb-4">
                 <div class="flex text-primary-400">
@@ -163,16 +174,16 @@
     </div>
 
     <!-- Призыв к действию -->
-  <section ref="ctaSection" class="py-24 text-white relative overflow-hidden" aria-labelledby="cta-title">
+  <section ref="ctaSection" class="py-24 text-white relative overflow-hidden" aria-labelledby="cta-title" style="background-color: var(--brand-primary-700);">
       <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_20%,white,transparent_40%),radial-gradient(circle_at_70%_80%,white,transparent_40%)]"></div>
       <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-        <h2 id="cta-title" v-split="{ types: 'words, chars', delayStep: 0.02 }" class="text-4xl md:text-5xl font-playfair font-bold mb-6">
+        <h2 id="cta-title" v-split="{ types: 'words, chars', delayStep: 0.02 }" class="text-4xl md:text-5xl font-playfair font-bold mb-6 opacity-0 transform translate-y-10">
           Готовы к незабываемому ужину?
         </h2>
-        <p v-split="{ types: 'words, chars', delayStep: 0.015 }" class="text-2xl mb-10">
+        <p v-split="{ types: 'words, chars', delayStep: 0.015 }" class="text-2xl mb-10 opacity-0 transform translate-y-8">
           Забронируйте столик прямо сейчас и насладитесь изысканной кухней в уютной атмосфере
         </p>
-        <div class="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
+        <div class="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center opacity-0 transform translate-y-6">
           <button v-split="{ types: 'words, chars', delayStep: 0.012, threshold: 0 }" class="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-4 px-10 rounded-xl transition-colors duration-300 shadow-glow" @click="isReservationOpen.value = true">
             Забронировать столик
           </button>
@@ -189,8 +200,10 @@
 </template>
 
 <script setup>
+import HeroDishTw from '~/components/HeroDishTw.vue'
 import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
 import { useReservationModal } from '@/composables/useReservationModal'
+import { useHomePageAnimations } from '@/composables/useHomePageAnimations'
 
 // SEO мета-теги
 useHead({
@@ -203,11 +216,11 @@ useHead({
 // Глобальное состояние модального окна бронирования
 const { isReservationOpen } = useReservationModal()
 
-// refs for animations
+// Анимации
+const { initAllAnimations } = useHomePageAnimations()
+
+// refs (минимум для текущих анимаций)
 const hero = ref(null)
-const popularSection = ref(null)
-const beigeGroup = ref(null)
-const ctaSection = ref(null)
 
 // Данные для популярных блюд
 const popularDishes = ref([
@@ -273,39 +286,7 @@ const reviews = ref([
   }
 ])
 
-// Smooth theme swap for Popular Dishes section
-let popObserver = null
-let ctaObserver = null
-onMounted(() => {
-  if (popularSection.value && beigeGroup.value) {
-    popObserver = new IntersectionObserver((entries) => {
-      for (const e of entries) {
-        if (e.isIntersecting && e.intersectionRatio > 0.35) {
-          beigeGroup.value.classList.add('is-active')
-        }
-      }
-    }, { threshold: [0, 0.35, 0.75, 1] })
-    popObserver.observe(popularSection.value)
-  }
-
-  if (ctaSection.value && beigeGroup.value) {
-    ctaObserver = new IntersectionObserver((entries) => {
-      for (const e of entries) {
-        if (e.isIntersecting && e.intersectionRatio > 0.25) {
-          beigeGroup.value.classList.remove('is-active')
-        }
-      }
-    }, { threshold: [0, 0.25, 0.5, 1] })
-    ctaObserver.observe(ctaSection.value)
-  }
-})
-onBeforeUnmount(() => {
-  if (popObserver && popularSection.value) popObserver.unobserve(popularSection.value)
-  if (ctaObserver && ctaSection.value) ctaObserver.unobserve(ctaSection.value)
-  popObserver = null
-  ctaObserver = null
-})
-// Убраны все GSAP-анимации, начнем заново по вашим требованиям
+// Убраны бежевые переключатели фона — общий фон страницы остаётся слитным
 
 // Structured data (JSON-LD) for homepage: ItemList of popular dishes and reviews
 const url = useRequestURL()
@@ -353,4 +334,9 @@ useHead(() => ({
     { type: 'application/ld+json', children: JSON.stringify(reviewsJson.value) }
   ]
 }))
+
+// Инициализация анимаций при монтировании компонента
+onMounted(() => {
+  initAllAnimations(hero.value)
+})
 </script>

@@ -5,7 +5,11 @@
         <!-- Логотип -->
         <div class="flex-shrink-0 flex items-center">
           <NuxtLink to="/" class="flex items-center">
-            <img src="/content/IMG_3306.PNG" alt="Логотип" class="h-14 w-auto"/>
+            <picture>
+              <source srcset="/content/IMG_3306.PNG.avif" type="image/avif" />
+              <source srcset="/content/IMG_3306.PNG.webp" type="image/webp" />
+              <img src="/content/IMG_3306.PNG" alt="Логотип" class="h-14 w-auto"/>
+            </picture>
           </NuxtLink>
         </div>
 

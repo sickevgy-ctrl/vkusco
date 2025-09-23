@@ -1,11 +1,11 @@
 <template>
-  <div class="min-h-screen relative text-white">
+  <div class="min-h-screen relative text-white" style="background-color: var(--brand-primary-700);">
     <!-- subtle decorative grid background -->
     <div class="pointer-events-none absolute inset-0 bg-grid bg-grid opacity-10"></div>
     <header>
       <AppNavigation />
     </header>
-    <main id="main-content" class="pt-16">
+    <main id="main-content" class="pt-16" style="background-color: var(--brand-primary-700);">
       <slot />
     </main>
     <AppFooter />

@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2025-09-23
+
+### Fixed
+- Client-only guard for GSAP plugin to eliminate `process` reference error in browser context.
+- Prevented duplicate registration of the `v-split` directive by adding an SSR-safe no-op on server and a client-only directive plugin.
+
+### Changed
+- Iterated navbar design (rounded, centered pill, separate logo chip, mobile "Меню" button, hide-on-scroll). Final UI was reverted by request to the original baseline; release captures stable code without experimental UI.
+
+### Maintenance
+- General cleanup and type fixes across plugins. Prepared for next UI iteration as a separate track.
+
 ## [1.1.0] - 2025-09-22
 
 ### Added / Changed

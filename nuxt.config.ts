@@ -18,6 +18,10 @@ export default defineNuxtConfig({
     }]
   ],
   css: ['@/assets/css/main.css', 'lenis/dist/lenis.css'],
+  routeRules: {
+    '/images/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+    '/content/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } }
+  },
   app: {
     head: {
       title: `${brand.name} — Ресторан изысканной кухни`,

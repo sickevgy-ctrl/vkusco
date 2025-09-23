@@ -13,7 +13,7 @@ export default {
     muted: '#F3F4F6'
   },
   fonts: {
-    primary: { family: 'Montserrat', weights: [300, 500] },
+    primary: { family: 'Montserrat', weights: [300, 500, 900] },
     display: { family: 'Cormorant Garamond', weights: [400, 700] }
   },
   radius: {

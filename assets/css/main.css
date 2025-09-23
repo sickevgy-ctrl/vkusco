@@ -22,6 +22,17 @@
   body {
     background-color: var(--brand-primary-700);
     color: #e5e7eb; /* light gray for readability on dark bg */
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Убираем любые отступы у основных элементов */
+  * {
+    box-sizing: border-box;
+  }
+  
+  section {
+    margin: 0;
   }
   
   .font-playfair {
@@ -91,7 +102,9 @@
 
   /* Radial subtle background used on hero */
   .bg-radial-faded {
-    background: radial-gradient(1000px 500px at 50% 0%, rgba(255,255,255,0.06), transparent 60%);
+    background: 
+      radial-gradient(1000px 500px at 50% 0%, rgba(255,255,255,0.06), transparent 60%),
+      var(--brand-primary-700);
   }
 
   /* Shadows */
@@ -139,7 +152,7 @@
   
   .section-title {
     font-size: 2.25rem;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 700;
     color: var(--brand-surface);
     text-align: center;
