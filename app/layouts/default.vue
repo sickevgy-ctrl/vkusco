@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import brand from '@/brand.config'
+import brand from '~/brand.config'
 
 const url = useRequestURL()
 const origin = `${url.protocol}//${url.host}`

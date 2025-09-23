@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { defineNuxtConfig } from 'nuxt/config'
-import brand from './brand.config'
+import brand from './app/brand.config'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -17,7 +17,7 @@ export default defineNuxtConfig({
       inject: true
     }]
   ],
-  css: ['@/assets/css/main.css', 'lenis/dist/lenis.css'],
+  css: ['~/assets/css/main.css', 'lenis/dist/lenis.css'],
   routeRules: {
     '/images/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
     '/content/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } }
