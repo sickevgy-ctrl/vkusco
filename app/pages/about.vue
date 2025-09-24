@@ -105,7 +105,7 @@
         <h2 v-split class="text-3xl font-playfair font-bold mb-6">Приходите к нам</h2>
         <p class="text-lg mb-8">ул. Советской Армии, 177 — проведите время с близкими и почувствуйте, как легко двигаться к новым вершинам!</p>
         <div class="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
-          <button class="btn-primary shadow-glow" @click="isReservationOpen.value = true">Забронировать столик</button>
+          <button class="btn-primary shadow-glow" @click="isReservationOpen = true">Забронировать столик</button>
           <NuxtLink to="/contact" class="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-3 px-8 rounded-lg transition-all duration-300 inline-block">Контакты</NuxtLink>
         </div>
       </div>

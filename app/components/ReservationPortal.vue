@@ -4,5 +4,7 @@
 
 <script setup>
 import { useReservationModal } from '@/composables/useReservationModal'
+import ReservationModal from './ReservationModal.vue'
+
 const { isReservationOpen } = useReservationModal()
 </script>

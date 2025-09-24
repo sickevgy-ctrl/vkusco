@@ -3,7 +3,7 @@ import { defineNuxtConfig } from 'nuxt/config'
 import brand from './app/brand.config'
 
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  devtools: { enabled: process.env.NODE_ENV === 'development' },
   compatibilityDate: '2025-09-21',
   modules: [
     '@nuxtjs/tailwindcss',

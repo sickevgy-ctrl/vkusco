@@ -1,17 +1,18 @@
 <template>
   <div style="background-color: var(--brand-primary-700);">
-    <!-- Героя секция -->
-    <section ref="hero" class="relative h-screen flex items-center justify-center overflow-hidden bg-radial-faded" style="background-color: var(--brand-primary-700);">
-      <!-- Фоновое изображение -->
-      <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30 z-10"></div>
-      <!-- Animated blobs -->
-  <div class="absolute -top-24 -left-24 w-72 h-72 bg-primary-500/30 rounded-full blur-3xl animate-blob"></div>
-  <div class="absolute -bottom-24 -right-24 w-72 h-72 bg-primary-600/25 rounded-full blur-3xl animate-blob [animation-delay:2s]"></div>
-      <picture class="absolute inset-0 block">
-        <source srcset="/images/IMG_5217.JPG.avif" type="image/avif" />
-        <source srcset="/images/IMG_5217.JPG.webp" type="image/webp" />
-        <img src="/images/IMG_5217.JPG" alt="Фон ресторана" class="w-full h-full object-cover" />
-      </picture>
+    <!-- Героя секция как карточка во всю ширину -->
+    <section ref="hero" class="relative h-screen flex items-start justify-center overflow-hidden section-card w-[100vw] z-10">
+      <!-- Plasma background -->
+      <div class="absolute inset-0" style="background-color: rgb(6, 0, 16);">
+        <Plasma 
+          color="#6F8F4B"
+          :speed="1"
+          direction="forward"
+          :scale="1"
+          :opacity="1"
+          :mouse-interactive="true"
+        />
+      </div>
 
       <!-- Декоративные растения (SVG) -->
       <svg ref="plantLeft" class="absolute left-0 bottom-0 h-64 w-auto z-20 opacity-0" viewBox="0 0 120 240" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,41 +25,30 @@
       </svg>
       
       <!-- Контент -->
-      <div ref="heroContent" class="relative z-20 text-center text-white px-4 sm:px-6 lg:px-8">
-        <h1 v-split="{ types: 'words, chars', delayStep: 0.03 }" class="text-4xl md:text-6xl lg:text-7xl font-playfair font-bold mb-6 drop-shadow-glow tracking-tight opacity-0 transform translate-y-10">
-          Семейный ресторан‑кондитерская
-        </h1>
-        <p v-split="{ types: 'words, chars', delayStep: 0.02 }" class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto text-white/90 opacity-0 transform translate-y-8">
-          С лучшими блюдами разных кухонь мира. Переходи на новый уровень — выбирай лучшее. Вкусная еда в хорошей компании.
-        </p>
-        <div class="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center opacity-0 transform translate-y-6">
-          <button v-split="{ types: 'words, chars', delayStep: 0.015, threshold: 0 }" class="btn-primary text-lg px-10 py-5 shadow-glow" @click="isReservationOpen.value = true">
-            Забронировать столик
-          </button>
-          <NuxtLink v-split="{ types: 'words, chars', delayStep: 0.015, threshold: 0 }" to="/menu" class="btn-secondary text-lg px-10 py-5 inline-block">
-            Посмотреть меню
-          </NuxtLink>
+      <div ref="heroContent" class="relative z-20 text-center text-white px-4 sm:px-6 lg:px-8 h-full flex items-center justify-center pt-16">
+        <div class="mx-auto max-w-5xl">
+          <h1 class="text-balance font-black text-white tracking-[-0.02em] text-[clamp(32px,7vw,96px)] leading-[1.03] mb-4" style="font-weight: 1000;">
+            <span class="block">ПИТАНИЕ</span>
+            <span class="block">ПОЛЕЗНЕЕ</span>
+            <span class="block">ПРАВИЛЬНОГО</span>
+          </h1>
+          <p class="max-w-prose text-[clamp(16px,1.2vw,20px)] leading-relaxed text-white/85 mt-2 md:mt-3 mb-4">
+            Мы слишком долго и усердно трудимся над тем что бы вы были здоровы и при этом ели привычную и вкусную еду.
+          </p>
+          <div class="mt-2 space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
+            <button v-split="{ types: 'words, chars', delayStep: 0.015, threshold: 0 }" class="btn-primary text-lg px-10 py-5 shadow-glow" @click="isReservationOpen = true">
+              Забронировать столик
+            </button>
+          </div>
         </div>
       </div>
 
-      <!-- Стрелка вниз -->
-      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
-        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-        </svg>
-      </div>
     </section>
 
-  <!-- Секция с блюдом -->
-  <HeroDishTw
-    class="block"
-    :title="`ПИТАНИЕ\nПОЛЕЗНЕЕ\nПРАВИЛЬНОГО`"
-    :lead="`Мы слишком долго и усердно трудимся \nнад тем что бы вы были здоровы \nи при этом ели привычную и вкусную еду.`"
-    imgSrc="/images/20250922_1637_Блюдо в нижнем углу_remix_01k5rt47fdfd4rgxhh1mydfcr4.avif"
-  />
+  
 
   <!-- О ресторане -->
-  <section class="py-20 relative" aria-labelledby="about-title" style="background-color: var(--brand-primary-700);">
+  <section class="py-16 section-card w-[100vw]" aria-labelledby="about-title" style="background-color: var(--brand-primary-700);">
       <div class="absolute inset-0 bg-grid bg-[length:32px_32px] opacity-30 pointer-events-none"></div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -91,16 +81,16 @@
     </section>
 
   <!-- Блоки контента (фон остаётся слитным по всей странице) -->
-  <div aria-live="polite" style="background-color: var(--brand-primary-700);">
+  <div aria-live="polite">
       <!-- Популярные блюда -->
-      <section ref="popularSection" class="py-20" aria-labelledby="popular-title" style="background-color: var(--brand-primary-700);">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section ref="popularSection" class="py-16 section-card w-[100vw]" aria-labelledby="popular-title" style="background-color: var(--brand-primary-700);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <h2 id="popular-title" v-split class="section-title opacity-0 transform translate-y-10">Популярные блюда</h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div 
               v-for="dish in popularDishes" 
               :key="dish.id"
-              class="dish-card bg-white/5 backdrop-blur rounded-2xl shadow-elegant overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-white/10 opacity-0 transform translate-y-12"
+                class="dish-card bg-white/5 backdrop-blur rounded-[28px] shadow-elegant overflow-hidden hover:shadow-xl transition-all duration-300 opacity-0 transform translate-y-12 first:opacity-100"
             >
               <img 
                 :src="dish.image" 
@@ -127,14 +117,14 @@
       </section>
 
       <!-- Атмосфера -->
-      <section class="py-20" aria-labelledby="atmosphere-title" style="background-color: var(--brand-primary-700);">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section class="py-16 section-card w-[100vw]" aria-labelledby="atmosphere-title" style="background-color: var(--brand-primary-700);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <h2 id="atmosphere-title" v-split class="section-title opacity-0 transform translate-y-10">Наша атмосфера</h2>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div
               v-for="(img, idx) in atmosphereImages"
               :key="idx"
-              class="relative group rounded-xl overflow-hidden shadow-elegant"
+              class="relative group rounded-[24px] overflow-hidden shadow-elegant"
             >
               <img
                 :src="img.src"
@@ -149,14 +139,14 @@
       </section>
 
       <!-- Отзывы -->
-      <section class="py-20" aria-labelledby="reviews-title" style="background-color: var(--brand-primary-700);">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section class="py-16 section-card w-[100vw]" aria-labelledby="reviews-title" style="background-color: var(--brand-primary-700);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <h2 id="reviews-title" v-split class="section-title opacity-0 transform translate-y-10">Что говорят о нас</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div 
               v-for="review in reviews" 
               :key="review.id"
-              class="review-card bg-white/5 backdrop-blur p-6 rounded-lg shadow-lg border border-white/10 opacity-0 transform translate-y-12"
+              class="review-card bg-white/5 backdrop-blur p-6 rounded-[24px] shadow-lg opacity-0 transform translate-y-12 first:opacity-100"
             >
               <div class="flex items-center mb-4">
                 <div class="flex text-primary-400">
@@ -174,7 +164,7 @@
     </div>
 
     <!-- Призыв к действию -->
-  <section ref="ctaSection" class="py-24 text-white relative overflow-hidden" aria-labelledby="cta-title" style="background-color: var(--brand-primary-700);">
+  <section ref="ctaSection" class="py-24 text-white relative overflow-hidden section-card w-[100vw]" aria-labelledby="cta-title" style="background-color: var(--brand-primary-700);">
       <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_20%,white,transparent_40%),radial-gradient(circle_at_70%_80%,white,transparent_40%)]"></div>
       <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
         <h2 id="cta-title" v-split="{ types: 'words, chars', delayStep: 0.02 }" class="text-4xl md:text-5xl font-playfair font-bold mb-6 opacity-0 transform translate-y-10">
@@ -184,7 +174,7 @@
           Забронируйте столик прямо сейчас и насладитесь изысканной кухней в уютной атмосфере
         </p>
         <div class="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center opacity-0 transform translate-y-6">
-          <button v-split="{ types: 'words, chars', delayStep: 0.012, threshold: 0 }" class="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-4 px-10 rounded-xl transition-colors duration-300 shadow-glow" @click="isReservationOpen.value = true">
+          <button v-split="{ types: 'words, chars', delayStep: 0.012, threshold: 0 }" class="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-4 px-10 rounded-xl transition-colors duration-300 shadow-glow" @click="isReservationOpen = true">
             Забронировать столик
           </button>
           <a v-split="{ types: 'words, chars', delayStep: 0.012, threshold: 0 }"
@@ -201,6 +191,7 @@
 
 <script setup>
 import HeroDishTw from '~/components/HeroDishTw.vue'
+import Plasma from '~/components/Plasma.vue'
 import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
 import { useReservationModal } from '@/composables/useReservationModal'
 import { useHomePageAnimations } from '@/composables/useHomePageAnimations'

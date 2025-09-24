@@ -11,8 +11,8 @@ const props = withDefaults(defineProps<{
   title: 'НЕПРАВИЛЬНОЕ ПИТАНИЕ\nПОЛЕЗНЕЕ ВАШЕГО\nПРАВИЛЬНОГО',
   lead: 'мы слишком долго и усердно трудимся, над тем что бы вы были здоровы и при этом ели привычную и вкусную еду',
   // По умолчанию используем конкретный avif из /public/images
-  imgSrc: '/images/20250922_1637_Блюдо в нижнем углу_remix_01k5rt47fdfd4rgxhh1mydfcr4.avif',
-  alt: 'Блюдо на белой тарелке'
+  //imgSrc: '/images/20250922_1637_Блюдо в нижнем углу_remix_01k5rt47fdfd4rgxhh1mydfcr4.avif',
+ //alt: 'Блюдо на белой тарелке'
 })
 
 const baseSrc = computed(() => {
@@ -145,8 +145,8 @@ onBeforeUnmount(() => {
   <section
     ref="sectionRef"
     class="relative overflow-hidden px-[clamp(16px,4vw,48px)] py-[clamp(24px,6vw,72px)] h-screen"
-    style="background-color: var(--brand-primary-700);">
-    <div class="mx-auto grid max-w-7xl items-center gap-[clamp(28px,6vw,96px)] md:grid-cols-2">
+    style="background-color:">
+    <div class="mx-auto grid max-w-7xl items-center gap-[clamp(28px,6vw,96px)] md:grid-cols-2 min-h-full flex items-center pt-16">
       <!-- Текст -->
   <div class="relative z-20 md:pr-6">
         <h1
@@ -167,30 +167,6 @@ onBeforeUnmount(() => {
           class="max-w-prose text-[clamp(16px,1.2vw,20px)] leading-relaxed text-white/85 mt-2 md:mt-3">
           {{ props.lead }}
         </p>
-      </div>
-
-      <!-- Картинка -->
-      <div class="relative min-h-[320px] md:min-h-[420px]">
-        <!-- <picture> с AVIF/WebP, фоллбек на исходный файл -->
-        <picture ref="imgRef" class="absolute bottom-0 right-0 z-10 block origin-bottom-right scale-[2] w-[min(560px,100%)] md:w-[min(560px,95%)] md:translate-y-[8%]">
-          <source :srcset="`${baseSrc}.avif`" type="image/avif" />
-          <source :srcset="`${baseSrc}.webp`" type="image/webp" />
-          <img
-            :src="props.imgSrc"
-            :alt="props.alt"
-            decoding="async"
-            fetchpriority="high"
-            class="w-full h-auto object-contain drop-shadow-[0_18px_36px_rgba(0,0,0,0.35)]"
-          />
-        </picture>
-
-        <!-- мягкое свечение под тарелкой -->
-        <div
-          ref="glowRef"
-          aria-hidden="true"
-          class="pointer-events-none absolute z-0 blur-[10px] md:right-[6%] md:bottom-[6%] right-0 bottom-0 w-[min(520px,90%)] h-[min(520px,90%)] rounded-full"
-          style="background: radial-gradient(closest-side, rgba(255,255,255,0.9), rgba(255,255,255,0) 70%);">
-        </div>
       </div>
     </div>
   </section>

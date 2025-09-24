@@ -104,7 +104,7 @@
         <p v-split="{ types: 'words, chars', delayStep: 0.015 }" class="text-xl mb-10">
           Забронируйте столик и насладитесь нашими изысканными блюдами
         </p>
-        <button v-split="{ types: 'words, chars', delayStep: 0.012, threshold: 0 }" class="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-4 px-10 rounded-xl transition-colors duration-300 shadow-glow" @click="isReservationOpen.value = true">
+        <button v-split="{ types: 'words, chars', delayStep: 0.012, threshold: 0 }" class="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-4 px-10 rounded-xl transition-colors duration-300 shadow-glow" @click="isReservationOpen = true">
           Забронировать столик
         </button>
       </div>
