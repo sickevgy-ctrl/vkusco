@@ -1,0 +1,750 @@
+[
+  {
+    "id": "breakfast",
+    "name": "Завтраки",
+    "dishes": [
+      {
+        "id": 1,
+        "name": "Фермерский завтрак",
+        "description": "Говяжья вырезка, глазунья, обжаренный картофель дольками, шампиньоны и свежий салат",
+        "price": 785,
+        "weight": "370 г",
+        "image": "/images/dishes/fermer-zavtrak.jpg",
+        "ingredients": [
+          "говяжья вырезка",
+          "яйца",
+          "картофель",
+          "шампиньоны",
+          "салат"
+        ],
+        "isHit": true
+      },
+      {
+        "id": 2,
+        "name": "Немецкий завтрак",
+        "description": "Глазунья, манная колбаска, картофельные дольки, фасоль, салат",
+        "price": 625,
+        "weight": "340 г",
+        "image": "/images/dishes/nemeckiy-zavtrak.png",
+        "ingredients": [
+          "яйца",
+          "манная колбаска",
+          "картофель",
+          "фасоль",
+          "салат"
+        ],
+        "isHit": true
+      },
+      {
+        "id": 3,
+        "name": "Бриошь с лососем и яйцами пашот под муссом из пармезана и голландским соусом",
+        "description": "Бриошь с лососем и яйцами пашот под муссом из пармезана и голландским соусом",
+        "price": 785,
+        "weight": "275 г",
+        "image": "/images/dishes/briosh-losos.png",
+        "ingredients": [
+          "бриошь",
+          "лосось",
+          "яйца пашот",
+          "пармезан",
+          "голландский соус"
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Скрэмбл с жаренным авокадо",
+        "description": "Нежный скрэмбл с жаренным авокадо",
+        "price": 555,
+        "weight": "140 г",
+        "image": "/images/dishes/skrembl-avokado.png",
+        "ingredients": [
+          "яйца",
+          "авокадо",
+          "зелень"
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Драники из кабачка с яйцом пашот и лососем",
+        "description": "Нежные кабачковые драники в сочетании с нежным лососем и яйцом пашот",
+        "price": 850,
+        "weight": "220 г",
+        "image": "/images/dishes/draniki-kabachok.png",
+        "ingredients": [
+          "кабачок",
+          "лосось",
+          "яйца пашот",
+          "специи"
+        ]
+      },
+      {
+        "id": 6,
+        "name": "Сырники со сметаной и малиновым вареньем",
+        "description": "Нежные сырники с домашним вареньем и сметаной",
+        "price": 495,
+        "weight": "250 г",
+        "image": "/images/dishes/sirniki-smetana.png",
+        "ingredients": [
+          "творог",
+          "мука",
+          "яйца",
+          "сметана",
+          "малиновое варенье"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "salads",
+    "name": "Салаты",
+    "dishes": [
+      {
+        "id": 7,
+        "name": "Салат с говядиной и овощами гриль",
+        "description": "Ростбиф, овощи гриль",
+        "price": 795,
+        "weight": "180 г",
+        "image": "/images/dishes/salat-govyadina.png",
+        "ingredients": [
+          "ростбиф",
+          "овощи гриль",
+          "зелень",
+          "оливковое масло"
+        ]
+      },
+      {
+        "id": 8,
+        "name": "Салат Греческий",
+        "description": "Огурец, томат, болгарский перец, маслины, мягкий сыр, зелень",
+        "price": 485,
+        "weight": "180 г",
+        "image": "/images/dishes/salat-grecheskiy.png",
+        "ingredients": [
+          "огурец",
+          "томат",
+          "болгарский перец",
+          "маслины",
+          "сыр",
+          "зелень"
+        ]
+      },
+      {
+        "id": 9,
+        "name": "Салат с хрустящим баклажаном",
+        "description": "Салат с хрустящим баклажаном, томатами, зеленью и кедровым орехом",
+        "price": 595,
+        "weight": "220 г",
+        "image": "/images/dishes/salat-baklazhan.jpg",
+        "ingredients": [
+          "баклажан",
+          "томаты",
+          "зелень",
+          "кедровый орех",
+          "оливковое масло"
+        ]
+      },
+      {
+        "id": 10,
+        "name": "Салат с морепродуктами и гелем из малины",
+        "description": "Салат с морепродуктами и гелем из малины",
+        "price": 755,
+        "weight": "160 г",
+        "image": "/images/dishes/salat-moreprodukty.png",
+        "ingredients": [
+          "морепродукты",
+          "малина",
+          "зелень",
+          "специи"
+        ],
+        "isNew": true
+      },
+      {
+        "id": 11,
+        "name": "Оливье с лососем",
+        "description": "Классический оливье с лососем",
+        "price": 485,
+        "weight": "180 г",
+        "image": "/images/dishes/olive-losos.png",
+        "ingredients": [
+          "лосось",
+          "картофель",
+          "яйца",
+          "огурцы",
+          "горошек",
+          "майонез"
+        ],
+        "isNew": true
+      }
+    ]
+  },
+  {
+    "id": "soups",
+    "name": "Супы",
+    "dishes": [
+      {
+        "id": 12,
+        "name": "Тыквенный суп с креветками",
+        "description": "Крем-суп из тыквы с ароматными креветками и тыквенными семечками",
+        "price": 485,
+        "weight": "300 г",
+        "image": "/images/dishes/sup-tykvennyy.jpg",
+        "ingredients": [
+          "тыква",
+          "креветки",
+          "тыквенные семечки",
+          "сливки",
+          "специи"
+        ]
+      },
+      {
+        "id": 13,
+        "name": "Куриный суп с яйцом и домашней лапшой",
+        "description": "Домашний супчик с куриным филе",
+        "price": 345,
+        "weight": "360 г",
+        "image": "/images/dishes/sup-kurinyy.jpg",
+        "ingredients": [
+          "куриное филе",
+          "яйцо",
+          "домашняя лапша",
+          "овощи",
+          "зелень"
+        ]
+      },
+      {
+        "id": 14,
+        "name": "Том Ям",
+        "description": "Классический том ям с креветкой. Подается с рисом",
+        "price": 765,
+        "weight": "350 г",
+        "image": "/images/dishes/tom-yam.png",
+        "ingredients": [
+          "креветки",
+          "рис",
+          "кокосовое молоко",
+          "лайм",
+          "чили",
+          "лемонграсс"
+        ]
+      },
+      {
+        "id": 15,
+        "name": "Борщ",
+        "description": "Ароматный борщ, с кусочками говядины",
+        "price": 495,
+        "weight": "300 г",
+        "image": "/images/dishes/borsch.jpg",
+        "ingredients": [
+          "говядина",
+          "свекла",
+          "капуста",
+          "картофель",
+          "морковь",
+          "лук"
+        ]
+      },
+      {
+        "id": 16,
+        "name": "Окрошка на квасе с ветчиной",
+        "description": "Окрошка на квасе с ветчиной",
+        "price": 375,
+        "weight": "350 г",
+        "image": "/images/dishes/okroshka.png",
+        "ingredients": [
+          "квас",
+          "ветчина",
+          "огурцы",
+          "редис",
+          "яйца",
+          "зелень"
+        ],
+        "isHit": true
+      }
+    ]
+  },
+  {
+    "id": "main",
+    "name": "Горячее",
+    "dishes": [
+      {
+        "id": 17,
+        "name": "Стейк судака в сливочном соусе",
+        "description": "Нежный стейк судака в сливочном соусе",
+        "price": 765,
+        "weight": "210 г",
+        "image": "/images/dishes/steyk-sudak.png",
+        "ingredients": [
+          "судак",
+          "сливки",
+          "белое вино",
+          "зелень",
+          "специи"
+        ],
+        "isNew": true
+      },
+      {
+        "id": 18,
+        "name": "Бифштекс с картофельным пюре",
+        "description": "Сочный бифштекс с нежным картофельным пюре",
+        "price": 850,
+        "weight": "320 г",
+        "image": "/images/dishes/bifshteks.png",
+        "ingredients": [
+          "говядина",
+          "картофель",
+          "сливочное масло",
+          "молоко",
+          "специи"
+        ]
+      },
+      {
+        "id": 19,
+        "name": "Говядина томленная с картофельным гратеном",
+        "description": "Томленная говядина с картофельным гратеном",
+        "price": 995,
+        "weight": "250 г",
+        "image": "/images/dishes/govyadina-tomlennaya.png",
+        "ingredients": [
+          "говядина",
+          "картофель",
+          "сыр",
+          "сливки",
+          "специи"
+        ],
+        "isNew": true
+      },
+      {
+        "id": 20,
+        "name": "Сибас Аква Пацца",
+        "description": "Сибас Аква Пацца",
+        "price": 895,
+        "weight": "950 г",
+        "image": "/images/dishes/sibas-akva-pacca.png",
+        "ingredients": [
+          "сибас",
+          "специи",
+          "оливковое масло",
+          "лимон"
+        ],
+        "isNew": true
+      },
+      {
+        "id": 21,
+        "name": "Стейк лосося в кокосовом соусе",
+        "description": "Стейк лосося в кокосовом соусе",
+        "price": 1285,
+        "weight": "200 г",
+        "image": "/images/dishes/steyk-lososya.png",
+        "ingredients": [
+          "лосось",
+          "кокосовое молоко",
+          "специи",
+          "лимон"
+        ],
+        "isNew": true
+      }
+    ]
+  },
+  {
+    "id": "desserts",
+    "name": "Десерты",
+    "dishes": [
+      {
+        "id": 22,
+        "name": "Прага апельсин",
+        "description": "Классический торт с шоколадными бисквитами коржами, масляным шоколадным кремом и апельсиновыми цукатами",
+        "price": 2150,
+        "weight": "770 г",
+        "image": "/images/dishes/praga-apelsin.jpg",
+        "ingredients": [
+          "шоколадные бисквиты",
+          "шоколадный крем",
+          "апельсиновые цукаты",
+          "шоколад"
+        ]
+      },
+      {
+        "id": 23,
+        "name": "Наполеон с белым шоколадом",
+        "description": "Классический наполеон с белым шоколадом",
+        "price": 3500,
+        "weight": "1 кг",
+        "image": "/images/dishes/napoleon-belyy-shokolad.jpg",
+        "ingredients": [
+          "слоеное тесто",
+          "белый шоколад",
+          "заварной крем",
+          "сахарная пудра"
+        ]
+      },
+      {
+        "id": 24,
+        "name": "Молочная девочка",
+        "description": "Нежный тортик с бисквитами на основе сгущенного молока с кремом крем-чиз",
+        "price": 2250,
+        "weight": "800 г",
+        "image": "/images/dishes/molochnaya-devochka.jpg",
+        "ingredients": [
+          "бисквиты",
+          "сгущенное молоко",
+          "крем-чиз",
+          "ваниль"
+        ]
+      },
+      {
+        "id": 25,
+        "name": "Молочная девочка с грушей",
+        "description": "Нежный тортик с бисквитами на основе сгущенного молока с кремом крем-чиз и кусочками груши",
+        "price": 2550,
+        "weight": "800 г",
+        "image": "/images/dishes/molochnaya-devochka-grusha.jpg",
+        "ingredients": [
+          "бисквиты",
+          "сгущенное молоко",
+          "крем-чиз",
+          "груша",
+          "ваниль"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pasta",
+    "name": "Паста",
+    "dishes": [
+      {
+        "id": 26,
+        "name": "Паста Карбонара",
+        "description": "Классическая паста с беконом, яйцами и пармезаном",
+        "price": 645,
+        "weight": "280 г",
+        "image": "/images/dishes/pasta-carbonara.jpg",
+        "ingredients": [
+          "паста",
+          "бекон",
+          "яйца",
+          "пармезан",
+          "сливки"
+        ],
+        "isHit": false
+      },
+      {
+        "id": 27,
+        "name": "Ризотто с трюфелем",
+        "description": "Кремовое ризотто с ароматным трюфелем",
+        "price": 895,
+        "weight": "250 г",
+        "image": "/images/dishes/risotto-truffle.png",
+        "ingredients": [
+          "рис",
+          "трюфель",
+          "пармезан",
+          "сливки"
+        ],
+        "isHit": false
+      }
+    ]
+  },
+  {
+    "id": "bakery",
+    "name": "Выпечка",
+    "dishes": [
+      {
+        "id": 28,
+        "name": "Круассан с лососем",
+        "description": "Нежный круассан со слабосоленым лососем",
+        "price": 495,
+        "weight": "150 г",
+        "image": "/images/dishes/croissant-salmon.png",
+        "ingredients": [
+          "круассан",
+          "лосось",
+          "сливочный сыр",
+          "укроп"
+        ],
+        "isHit": false
+      },
+      {
+        "id": 29,
+        "name": "Круассан с ветчиной",
+        "description": "Ароматный круассан с нежной ветчиной",
+        "price": 350,
+        "weight": "210 г",
+        "image": "/images/dishes/croissant-ham.jpg",
+        "ingredients": [
+          "круассан",
+          "ветчина",
+          "сыр",
+          "зелень"
+        ],
+        "isHit": false
+      }
+    ]
+  },
+  {
+    "id": "pastries",
+    "name": "Пирожные",
+    "dishes": [
+      {
+        "id": 30,
+        "name": "Эклер ванильный",
+        "description": "Нежный эклер с ванильным кремом",
+        "price": 185,
+        "weight": "80 г",
+        "image": "/images/dishes/eclair-vanilla.jpg",
+        "ingredients": [
+          "заварное тесто",
+          "ванильный крем",
+          "глазурь"
+        ],
+        "isHit": false
+      },
+      {
+        "id": 31,
+        "name": "Профитроли шоколадные",
+        "description": "Маленькие профитроли с шоколадным кремом",
+        "price": 220,
+        "weight": "100 г",
+        "image": "/images/dishes/profiteroles-chocolate.jpg",
+        "ingredients": [
+          "заварное тесто",
+          "шоколадный крем",
+          "шоколад"
+        ],
+        "isHit": false
+      }
+    ]
+  },
+  {
+    "id": "cakes-available",
+    "name": "Торты в наличии",
+    "dishes": [
+      {
+        "id": 32,
+        "name": "Прага апельсин",
+        "description": "Классический торт с шоколадными бисквитами коржами, масляным шоколадным кремом и апельсиновыми цукатами",
+        "price": 2150,
+        "weight": "770 г",
+        "image": "/images/dishes/praga-apelsin.jpg",
+        "ingredients": [
+          "шоколадный бисквит",
+          "шоколадный крем",
+          "апельсиновые цукаты"
+        ],
+        "isHit": false
+      },
+      {
+        "id": 33,
+        "name": "Наполеон с белым шоколадом",
+        "description": "Нежный наполеон с кремом на основе белого шоколада",
+        "price": 3500,
+        "weight": "1 кг",
+        "image": "/images/dishes/napoleon-belyy-shokolad.jpg",
+        "ingredients": [
+          "слоеное тесто",
+          "белый шоколад",
+          "крем"
+        ],
+        "isHit": false
+      },
+      {
+        "id": 34,
+        "name": "Молочная девочка",
+        "description": "Нежный тортик с бисквитами на основе сгущенного молока с кремом крем-чиз",
+        "price": 2250,
+        "weight": "800 г",
+        "image": "/images/dishes/molochnaya-devochka.jpg",
+        "ingredients": [
+          "бисквит",
+          "сгущенное молоко",
+          "крем-чиз"
+        ],
+        "isHit": false
+      },
+      {
+        "id": 35,
+        "name": "Молочная девочка с грушей",
+        "description": "Нежный тортик с бисквитами на основе сгущенного молока с кремом крем-чиз и кусочками груши",
+        "price": 2550,
+        "weight": "800 г",
+        "image": "/images/dishes/molochnaya-devochka-grusha.jpg",
+        "ingredients": [
+          "бисквит",
+          "сгущенное молоко",
+          "крем-чиз",
+          "груша"
+        ],
+        "isHit": false
+      }
+    ]
+  },
+  {
+    "id": "snacks",
+    "name": "Перекус",
+    "dishes": [
+      {
+        "id": 36,
+        "name": "Круассан с курицей",
+        "description": "Свежий круассан с нежным куриным филе",
+        "price": 350,
+        "weight": "200 г",
+        "image": "/images/dishes/croissant-chicken.png",
+        "ingredients": [
+          "круассан",
+          "куриное филе",
+          "овощи",
+          "соус"
+        ],
+        "isHit": false
+      }
+    ]
+  },
+  {
+    "id": "candies",
+    "name": "Конфеты",
+    "dishes": [
+      {
+        "id": 37,
+        "name": "Ореховый трюфель",
+        "description": "Нежный трюфель на основе молочного бельгийского шоколада с ореховым вкусом шоколадной пасты",
+        "price": 205,
+        "weight": "30 г",
+        "image": "/images/dishes/truffle-nut.jpg",
+        "ingredients": [
+          "бельгийский шоколад",
+          "орехи",
+          "какао"
+        ],
+        "isHit": false
+      },
+      {
+        "id": 38,
+        "name": "Карамельный трюфель",
+        "description": "Нежный трюфель с домашней карамелью в хрустящем шоколадном корпусе",
+        "price": 205,
+        "weight": "30 г",
+        "image": "/images/dishes/truffle-caramel.jpg",
+        "ingredients": [
+          "бельгийский шоколад",
+          "карамель",
+          "орехи"
+        ],
+        "isHit": false
+      },
+      {
+        "id": 39,
+        "name": "Трюфель «Малина»",
+        "description": "Нежный трюфель на основе белого бельгийского шоколада с нежным пюре малины",
+        "price": 205,
+        "weight": "30 г",
+        "image": "/images/dishes/truffle-raspberry.jpg",
+        "ingredients": [
+          "белый шоколад",
+          "малина",
+          "какао"
+        ],
+        "isHit": false
+      }
+    ]
+  },
+  {
+    "id": "bread",
+    "name": "Хлеб",
+    "dishes": [
+      {
+        "id": 40,
+        "name": "Багет большой",
+        "description": "Ароматный багет с хрустящей корочкой. Идеально на завтрак",
+        "price": 145,
+        "weight": "300 г",
+        "image": "/images/dishes/baguette-large.jpg",
+        "ingredients": [
+          "пшеничная мука",
+          "вода",
+          "соль",
+          "дрожжи"
+        ],
+        "isHit": false
+      },
+      {
+        "id": 41,
+        "name": "Кукурузный хлеб",
+        "description": "Пушистый хлеб из кукурузной и пшеничной муки с хрустящей корочкой",
+        "price": 165,
+        "weight": "250 г",
+        "image": "/images/dishes/corn-bread.png",
+        "ingredients": [
+          "кукурузная мука",
+          "пшеничная мука",
+          "молоко"
+        ],
+        "isHit": false
+      },
+      {
+        "id": 42,
+        "name": "Фитнес хлеб",
+        "description": "Ржаной хлеб с тыквенными семечками и семенами подсолнуха",
+        "price": 165,
+        "weight": "300 г",
+        "image": "/images/dishes/fitness-bread.jpg",
+        "ingredients": [
+          "ржаная мука",
+          "тыквенные семечки",
+          "семена подсолнуха"
+        ],
+        "isHit": false
+      }
+    ]
+  },
+  {
+    "id": "sets",
+    "name": "Наборы пирожных и конфет",
+    "dishes": [
+      {
+        "id": 43,
+        "name": "Набор ягодных трюфелей",
+        "description": "Яркий набор нежных трюфелей из белого бельгийского шоколада с натуральным пюре фруктов",
+        "price": 2225,
+        "weight": "270 г",
+        "image": "/images/dishes/berry-truffle-set.png",
+        "ingredients": [
+          "белый шоколад",
+          "манго",
+          "малина",
+          "кокос"
+        ],
+        "isHit": false
+      },
+      {
+        "id": 44,
+        "name": "Набор шоколадных трюфелей",
+        "description": "Изысканный набор трюфелей из бельгийского темного и молочного шоколада",
+        "price": 2250,
+        "weight": "270 г",
+        "image": "/images/dishes/chocolate-truffle-set.png",
+        "ingredients": [
+          "темный шоколад",
+          "молочный шоколад",
+          "орехи",
+          "карамель"
+        ],
+        "isHit": false
+      },
+      {
+        "id": 45,
+        "name": "Набор трюфелей ассорти",
+        "description": "Изысканный набор трюфелей из бельгийского темного и белого шоколада",
+        "price": 4100,
+        "weight": "560 г",
+        "image": "/images/dishes/truffle-assortment.png",
+        "ingredients": [
+          "темный шоколад",
+          "белый шоколад",
+          "орехи",
+          "фрукты"
+        ],
+        "isHit": false
+      }
+    ]
+  }
+]

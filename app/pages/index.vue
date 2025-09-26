@@ -70,11 +70,15 @@
             </NuxtLink>
           </div>
           <div class="relative">
-            <img 
-              src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+            <OptimizedImage 
+              src="/images/atmosphere/main-hall.jpg"
               alt="Интерьер ресторана"
-              class="rounded-2xl shadow-elegant"
-            >
+              loading="eager"
+              decoding="sync"
+              img-class="rounded-2xl shadow-elegant"
+              width="800"
+              height="600"
+            />
           </div>
         </div>
       </div>
@@ -92,15 +96,22 @@
               :key="dish.id"
                 class="dish-card bg-white/5 backdrop-blur rounded-[28px] shadow-elegant overflow-hidden hover:shadow-xl transition-all duration-300 opacity-0 transform translate-y-12 first:opacity-100"
             >
-              <img 
+              <OptimizedImage 
                 :src="dish.image" 
                 :alt="dish.name"
-                loading="lazy" decoding="async"
-                class="w-full h-48 object-cover"
-              >
+                loading="lazy" 
+                decoding="async"
+                img-class="w-full h-48 object-cover"
+                width="500"
+                height="300"
+              />
               <div class="p-6">
-                <h3 v-split="{ types: 'words, chars', threshold: 0.25, delayStep: 0.02 }" class="text-xl font-semibold text-white mb-2">{{ dish.name }}</h3>
-                <p class="text-gray-200/80 mb-4">{{ dish.description }}</p>
+                <div class="flex items-center justify-between mb-2">
+                  <h3 v-split="{ types: 'words, chars', threshold: 0.25, delayStep: 0.02 }" class="text-xl font-semibold text-white">{{ dish.name }}</h3>
+                  <span v-if="dish.isHit" class="bg-primary-500 text-white text-xs px-2 py-1 rounded-full">Хит</span>
+                </div>
+                <p class="text-gray-200/80 mb-2">{{ dish.description }}</p>
+                <p class="text-gray-300/70 text-sm mb-4">{{ dish.weight }}</p>
                 <div class="flex justify-between items-center">
                   <span class="price text-2xl font-bold text-primary-300">{{ dish.price }} ₽</span>
                   <button class="btn-primary shadow-glow">Заказать</button>
@@ -126,11 +137,14 @@
               :key="idx"
               class="relative group rounded-[24px] overflow-hidden shadow-elegant"
             >
-              <img
+              <OptimizedImage
                 :src="img.src"
                 :alt="img.alt"
-                loading="lazy" decoding="async"
-                class="w-full h-48 md:h-56 object-cover transform transition-transform duration-300 group-hover:scale-105"
+                loading="lazy" 
+                decoding="async"
+                img-class="w-full h-48 md:h-56 object-cover transform transition-transform duration-300 group-hover:scale-105"
+                width="500"
+                height="400"
               />
               <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300"></div>
             </div>
@@ -141,23 +155,96 @@
       <!-- Отзывы -->
       <section class="py-16 section-card w-[100vw]" aria-labelledby="reviews-title" style="background-color: var(--brand-primary-700);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <h2 id="reviews-title" v-split class="section-title opacity-0 transform translate-y-10">Что говорят о нас</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div 
-              v-for="review in reviews" 
-              :key="review.id"
-              class="review-card bg-white/5 backdrop-blur p-6 rounded-[24px] shadow-lg opacity-0 transform translate-y-12 first:opacity-100"
-            >
-              <div class="flex items-center mb-4">
+          <div class="flex items-center justify-between mb-8">
+            <h2 id="reviews-title" v-split class="section-title opacity-0 transform translate-y-10">Что говорят о нас</h2>
+            <div class="flex items-center space-x-4">
+              <div v-if="averageRating > 0" class="flex items-center space-x-2">
                 <div class="flex text-primary-400">
-                  <svg v-for="star in 5" :key="star" class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                  <svg v-for="star in 5" :key="star" class="w-4 h-4 fill-current" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                   </svg>
                 </div>
+                <span class="text-white font-semibold">{{ averageRating.toFixed(1) }}</span>
+                <span class="text-gray-300 text-sm">({{ totalCount }} отзывов)</span>
+              </div>
+              <button 
+                @click="refreshReviews"
+                :disabled="isLoading"
+                class="text-primary-300 hover:text-primary-200 transition-colors duration-300 disabled:opacity-50"
+                title="Обновить отзывы"
+              >
+                <svg class="w-5 h-5" :class="{ 'animate-spin': isLoading }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Индикатор загрузки -->
+          <div v-if="isLoading && !hasReviews" class="flex justify-center py-8">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-400"></div>
+          </div>
+          
+          <!-- Ошибка загрузки -->
+          <div v-if="error && !hasReviews" class="text-center py-8">
+            <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-4 text-red-300">
+              {{ error }}
+            </div>
+          </div>
+          
+          <!-- Отзывы -->
+          <div v-if="hasReviews" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div 
+              v-for="(review, index) in recentReviews" 
+              :key="review.id"
+              class="review-card bg-white/5 backdrop-blur p-6 rounded-[24px] shadow-lg opacity-0 transform translate-y-12"
+              :style="{ 
+                animationDelay: `${index * 100}ms`,
+                animation: hasReviews ? 'fadeInUp 0.6s ease-out forwards' : 'none'
+              }"
+            >
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex text-primary-400">
+                  <svg 
+                    v-for="star in generateStars(review.rating)" 
+                    :key="star.index" 
+                    class="w-5 h-5" 
+                    :class="star.filled ? 'fill-current' : 'text-gray-600'"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                  </svg>
+                </div>
+                <span class="text-gray-400 text-sm">{{ formatReviewDate(review.date) }}</span>
               </div>
               <p class="text-gray-200/90 mb-4 italic">"{{ review.text }}"</p>
-              <div class="font-semibold text-white">{{ review.author }}</div>
+              <div class="flex items-center justify-between">
+                <div class="font-semibold text-white">{{ review.author }}</div>
+                <a 
+                  href="https://yandex.ru/maps/org/vkusnaya_kompaniya/243452895564/reviews/?ll=50.202188%2C53.222568&z=17"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-primary-300 hover:text-primary-200 text-sm transition-colors duration-300"
+                >
+                  Яндекс.Карты →
+                </a>
+              </div>
             </div>
+          </div>
+          
+          <!-- Ссылка на все отзывы -->
+          <div v-if="hasReviews" class="text-center mt-8">
+            <a 
+              href="https://yandex.ru/maps/org/vkusnaya_kompaniya/243452895564/reviews/?ll=50.202188%2C53.222568&z=17"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center space-x-2 text-primary-300 hover:text-primary-200 transition-colors duration-300"
+            >
+              <span>Посмотреть все отзывы на Яндекс.Картах</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+              </svg>
+            </a>
           </div>
         </div>
       </section>
@@ -190,144 +277,151 @@
 </template>
 
 <script setup>
-import HeroDishTw from '~/components/HeroDishTw.vue'
-import Plasma from '~/components/Plasma.vue'
-import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
+import OptimizedImage from '~/components/OptimizedImage.vue'
+import { ref, onMounted, onBeforeUnmount, computed, watch } from 'vue'
 import { useReservationModal } from '@/composables/useReservationModal'
 import { useHomePageAnimations } from '@/composables/useHomePageAnimations'
-
-// SEO мета-теги
-useHead({
-  title: 'Вкусная компания — Ресторан изысканной кухни',
-  meta: [
-    { name: 'description', content: '«Вкусная компания» — ресторан европейской кухни в самом сердце города. Забронируйте столик для незабываемого ужина.' }
-  ]
-})
+import { useImageOptimization } from '@/composables/useImageOptimization'
+import { useLazyLoading } from '@/composables/useLazyLoading'
+import { useSEO, usePageSEO } from '@/composables/useSEO'
+import { useYandexReviews } from '@/composables/useYandexReviews'
 
 // Глобальное состояние модального окна бронирования
 const { isReservationOpen } = useReservationModal()
 
+// Отзывы с Яндекс.Карт
+const {
+  reviews,
+  isLoading,
+  error,
+  totalCount,
+  averageRating,
+  hasReviews,
+  recentReviews,
+  fetchReviews,
+  refreshReviews,
+  formatReviewDate,
+  generateStars
+} = useYandexReviews()
+
 // Анимации
 const { initAllAnimations } = useHomePageAnimations()
+
+// Оптимизация изображений
+const { createOptimizedImage } = useImageOptimization()
+
+// Lazy loading для анимаций
+const { observe, isIntersecting: isAnimationsIntersecting } = useLazyLoading({
+  rootMargin: '100px 0px',
+  threshold: 0.1,
+  once: true
+})
 
 // refs (минимум для текущих анимаций)
 const hero = ref(null)
 
-// Данные для популярных блюд
+// Данные для популярных блюд (из vkusdostavka.shop)
 const popularDishes = ref([
   {
     id: 1,
-    name: 'Ризотто с трюфелями',
-    description: 'Кремовое ризотто с белыми трюфелями и пармезаном',
-    price: 1890,
-    image: 'https://images.unsplash.com/photo-1476124369491-e7addf5db371?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+    name: 'Фермерский завтрак',
+    description: 'Говяжья вырезка, глазунья, обжаренный картофель дольками, шампиньоны и свежий салат',
+    price: 785,
+    weight: '370 г',
+    image: '/images/dishes/fermer-zavtrak.jpg',
+    isHit: true
   },
   {
     id: 2,
-    name: 'Паста Карбонара',
-    description: 'Классическая паста с беконом, яйцом и пармезаном',
-    price: 890,
-    image: 'https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+    name: 'Немецкий завтрак',
+    description: 'Глазунья, манная колбаска, картофельные дольки, фасоль, салат',
+    price: 625,
+    weight: '340 г',
+    image: '/images/dishes/nemeckiy-zavtrak.jpg',
+    isHit: true
   },
   {
     id: 3,
-    name: 'Оссо Буко',
-    description: 'Тушеная телячья голень в томатном соусе с овощами',
-    price: 2390,
-    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+    name: 'Бриошь с лососем',
+    description: 'Бриошь с лососем и яйцами пашот под муссом из пармезана и голландским соусом',
+    price: 785,
+    weight: '275 г',
+    image: '/images/dishes/briosh-losos.jpg'
   }
 ])
+
+// Статичные отзывы удалены - теперь используем динамические из Яндекс.Карт
 
 // Изображения атмосферы
 const atmosphereImages = ref([
   {
-    src: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+    src: '/images/atmosphere/main-hall.jpg',
     alt: 'Основной зал'
   },
   {
-    src: 'https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+    src: '/images/atmosphere/bar-counter.jpg',
     alt: 'Барная стойка'
   },
   {
-    src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+    src: '/images/atmosphere/terrace.jpg',
     alt: 'Летняя терраса'
   },
   {
-    src: 'https://images.unsplash.com/photo-1578474846511-04ba529f0b88?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
+    src: '/images/atmosphere/wine-cellar.jpg',
     alt: 'Винный погреб'
   }
 ])
 
-// Отзывы
-const reviews = ref([
-  {
-    id: 1,
-    text: 'Потрясающая еда и обслуживание! Обязательно вернемся снова.',
-    author: 'Анна Петрова'
-  },
-  {
-    id: 2,
-    text: 'Лучший итальянский ресторан в городе. Рекомендую всем!',
-    author: 'Михаил Сидоров'
-  },
-  {
-    id: 3,
-    text: 'Романтическая атмосфера и изысканная кухня. Идеально для свидания.',
-    author: 'Елена Волкова'
-  }
-])
-
-// Убраны бежевые переключатели фона — общий фон страницы остаётся слитным
-
-// Structured data (JSON-LD) for homepage: ItemList of popular dishes and reviews
-const url = useRequestURL()
-const origin = `${url.protocol}//${url.host}`
-const restaurantId = `${origin}/#restaurant`
-
-const itemListJson = computed(() => ({
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  itemListElement: popularDishes.value.map((dish, idx) => ({
-    '@type': 'ListItem',
-    position: idx + 1,
-    item: {
-      '@type': 'MenuItem',
-      name: dish.name,
-      description: dish.description,
-      image: dish.image,
-      offers: {
-        '@type': 'Offer',
-        priceCurrency: 'RUB',
-        price: dish.price
-      }
-    }
-  }))
-}))
-
-const reviewsJson = computed(() => ({
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  itemListElement: reviews.value.map((r, idx) => ({
-    '@type': 'ListItem',
-    position: idx + 1,
-    item: {
-      '@type': 'Review',
-      reviewBody: r.text,
-      author: { '@type': 'Person', name: r.author },
-      itemReviewed: { '@id': restaurantId }
-    }
-  }))
-}))
-
-useHead(() => ({
-  script: [
-    { type: 'application/ld+json', children: JSON.stringify(itemListJson.value) },
-    { type: 'application/ld+json', children: JSON.stringify(reviewsJson.value) }
+// Простая SEO настройка для главной страницы
+useHead({
+  title: 'Главная | Вкусная компания — Ресторан изысканной кухни',
+  meta: [
+    { name: 'description', content: '«Вкусная компания» — ресторан европейской кухни в самом сердце города. Забронируйте столик для незабываемого ужина.' },
+    { name: 'keywords', content: 'ресторан, европейская кухня, бронирование, ужин, обед' }
   ]
-}))
+})
 
 // Инициализация анимаций при монтировании компонента
-onMounted(() => {
-  initAllAnimations(hero.value)
+onMounted(async () => {
+  // Предзагружаем только критическое изображение героя
+  const criticalImage = '/images/atmosphere/main-hall.jpg'
+  
+  // Предзагружаем только критическое изображение
+  const link = document.createElement('link')
+  link.rel = 'preload'
+  link.as = 'image'
+  link.href = criticalImage
+  document.head.appendChild(link)
+  
+  // Загружаем отзывы с Яндекс.Карт
+  await fetchReviews()
+  
+  // Наблюдаем за hero секцией для lazy loading анимаций
+  if (hero.value) {
+    observe(hero.value)
+  }
+  
+  // Инициализируем анимации только когда они попадают в viewport
+  watch(isAnimationsIntersecting, (intersecting) => {
+    if (intersecting) {
+      // Используем requestIdleCallback для неблокирующей инициализации
+      requestIdleCallback(() => {
+        initAllAnimations(hero.value)
+      })
+    }
+  })
 })
 </script>
+
+<style scoped>
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>

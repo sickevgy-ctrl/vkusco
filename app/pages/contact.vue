@@ -219,15 +219,30 @@
 
     <!-- Карта -->
     <section>
-      <div class="h-96 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center">
-        <div class="text-center text-gray-200">
-          <svg class="w-12 h-12 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+      <div class="h-96 bg-white/5 border border-white/10 rounded-xl overflow-hidden">
+        <iframe 
+          src="https://yandex.ru/map-widget/v1/?ll=50.204552%2C53.221923&z=16&l=map&mode=poi&poi%5Bpoint%5D=50.202182%2C53.222573&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D243452895564"
+          width="100%" 
+          height="100%" 
+          frameborder="0"
+          loading="lazy"
+          class="rounded-xl"
+          title="Карта расположения ресторана Вкусная компания"
+          allowfullscreen="true"
+        ></iframe>
+      </div>
+      <div class="mt-4 text-center">
+        <a 
+          href="https://yandex.ru/maps/51/samara/?indoorLevel=1&ll=50.204552%2C53.221923&mode=poi&poi%5Bpoint%5D=50.202182%2C53.222573&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D243452895564&utm_source=review&z=16.73"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center text-primary-300 hover:text-primary-200 transition-colors duration-300 text-sm"
+        >
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
           </svg>
-          <p class="text-lg">Интерактивная карта</p>
-          <p class="text-sm">г. Самара, ул. Советской Армии, 177</p>
-        </div>
+          Открыть в Яндекс.Картах
+        </a>
       </div>
     </section>
 
@@ -257,14 +272,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useReservationModal } from '@/composables/useReservationModal'
-
-// SEO
-useHead({
-  title: 'Контакты — Вкусная компания',
-  meta: [
-    { name: 'description', content: 'Свяжитесь с «Вкусной Компанией»: г. Самара, ул. Советской Армии, 177. Бронирование: +7 (917) 142-15-74 или через форму обратной связи.' }
-  ]
-})
+import { usePageSEO, useSEO } from '@/composables/useSEO'
 
 // Глобальное состояние модального окна бронирования
 const { isReservationOpen } = useReservationModal()
@@ -305,83 +313,78 @@ const submitForm = async () => {
   }, 5000)
 }
 
-// Breadcrumbs and contact structured data
-const url = useRequestURL()
-const origin = `${url.protocol}//${url.host}`
-const organizationId = `${origin}/#organization`
-useHead({
-  script: [
-    {
-      type: 'application/ld+json',
-      children: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Главная', item: `${origin}/` },
-          { '@type': 'ListItem', position: 2, name: 'Контакты', item: `${origin}/contact` }
-        ]
-      })
+// SEO оптимизация для страницы контактов
+const { generateRestaurantStructuredData } = useSEO()
+
+// Structured data для всех филиалов
+const branchesStructuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Restaurant',
+    name: 'Вкусная компания — Садовая, 212Б',
+    telephone: '+7-987-955-25-65',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Садовая 212Б',
+      addressLocality: 'Самара',
+      addressCountry: 'RU'
     },
-    {
-      type: 'application/ld+json',
-      children: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        '@id': organizationId,
-        contactPoint: [{
-          '@type': 'ContactPoint',
-          telephone: '+7-917-142-15-74',
-          contactType: 'customer service',
-          areaServed: 'RU',
-          availableLanguage: ['ru']
-        }]
-      })
+    openingHoursSpecification: [
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '08:00', closes: '21:00' },
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Saturday'], opens: '08:30', closes: '21:00' },
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Sunday'], opens: '09:00', closes: '21:00' }
+    ]
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Restaurant',
+    name: 'Вкусная компания — ул. Советской Армии, 177',
+    telephone: '+7-917-142-15-74',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'ул. Советской Армии, 177',
+      addressLocality: 'Самара',
+      addressCountry: 'RU'
     },
-    {
-      type: 'application/ld+json',
-      children: JSON.stringify([
-        {
-          '@context': 'https://schema.org',
-          '@type': 'Restaurant',
-          name: 'Вкусная компания — Садовая, 212Б',
-          branchOf: { '@id': organizationId },
-          telephone: '+7-987-955-25-65',
-          address: { '@type': 'PostalAddress', streetAddress: 'Садовая 212Б', addressLocality: '—' },
-          openingHoursSpecification: [
-            { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '08:00', closes: '21:00' },
-            { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Saturday'], opens: '08:30', closes: '21:00' },
-            { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Sunday'], opens: '09:00', closes: '21:00' }
-          ]
-        },
-        {
-          '@context': 'https://schema.org',
-          '@type': 'Restaurant',
-          name: 'Вкусная компания — ул. Советской Армии, 177',
-          branchOf: { '@id': organizationId },
-          telephone: '+7-917-142-15-74',
-          address: { '@type': 'PostalAddress', streetAddress: 'ул. Советской Армии, 177', addressLocality: '—' },
-          openingHoursSpecification: [
-            { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday'], opens: '09:00', closes: '21:00' },
-            { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Thursday'], opens: '09:00', closes: '22:00' },
-            { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Friday','Saturday'], opens: '09:00', closes: '23:00' },
-            { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Sunday'], opens: '10:00', closes: '21:00' }
-          ]
-        },
-        {
-          '@context': 'https://schema.org',
-          '@type': 'Restaurant',
-          name: 'Вкусная компания — Лесная ул., 33 (этаж 2)',
-          branchOf: { '@id': organizationId },
-          telephone: '+7-967-920-65-35',
-          address: { '@type': 'PostalAddress', streetAddress: 'Лесная ул., 33, этаж 2', addressLocality: '—' },
-          openingHoursSpecification: [
-            { '@type': 'OpeningHoursSpecification', dayOfWeek: [
-              'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'
-            ], opens: '09:00', closes: '21:00' }
-          ]
-        }
-      ])
-    }
-  ]
+    openingHoursSpecification: [
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday'], opens: '09:00', closes: '21:00' },
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Thursday'], opens: '09:00', closes: '22:00' },
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Friday','Saturday'], opens: '09:00', closes: '23:00' },
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Sunday'], opens: '10:00', closes: '21:00' }
+    ]
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Restaurant',
+    name: 'Вкусная компания — Лесная ул., 33 (этаж 2)',
+    telephone: '+7-967-920-65-35',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Лесная ул., 33, этаж 2',
+      addressLocality: 'Самара',
+      addressCountry: 'RU'
+    },
+    openingHoursSpecification: [
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: [
+        'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'
+      ], opens: '09:00', closes: '21:00' }
+    ]
+  }
+]
+
+// Настройка SEO для страницы контактов
+usePageSEO({
+  title: 'Контакты',
+  description: 'Свяжитесь с «Вкусной Компанией»: г. Самара, ул. Советской Армии, 177. Бронирование: +7 (917) 142-15-74 или через форму обратной связи.',
+  keywords: ['контакты', 'адрес', 'телефон', 'бронирование', 'Самара', 'ресторан'],
+  image: 'https://vkusnayakompania.ru/images/atmosphere/main-hall.jpg'
 })
+
+// Добавляем structured data для филиалов
+useHead(() => ({
+  script: branchesStructuredData.map(branch => ({
+    type: 'application/ld+json',
+    children: JSON.stringify(branch)
+  }))
+}))
 </script>

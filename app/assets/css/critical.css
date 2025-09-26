@@ -1,0 +1,177 @@
+/* Критические стили для быстрой загрузки */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Montserrat', sans-serif;
+    scroll-behavior: smooth;
+  }
+  
+  :root {
+    --brand-primary: #3A4F2E;
+    --brand-primary-600: #314426;
+    --brand-primary-700: #293920;
+    --brand-accent: #6F8F4B;
+    --brand-surface: #FFFFFF;
+    --brand-muted: #F3F4F6;
+    --brand-beige: #F5F0E6;
+    --brand-radius-md: 12px;
+    --brand-radius-lg: 16px;
+    --brand-radius-xl: 20px;
+  }
+  
+  body {
+    background-color: var(--brand-primary-700);
+    color: #e5e7eb;
+    margin: 0;
+    padding: 0;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  section {
+    margin: 0;
+  }
+  
+  .font-playfair {
+    font-family: 'Cormorant Garamond', serif;
+  }
+}
+
+@layer components {
+  /* Критические стили для hero секции */
+  .section-card {
+    background: rgba(255,255,255,0.04);
+    border-radius: 28px;
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.25);
+    backdrop-filter: saturate(140%) blur(6px);
+    -webkit-backdrop-filter: saturate(140%) blur(6px);
+  }
+  
+  .section-card:first-of-type {
+    background: transparent;
+  }
+  
+  .section-title {
+    font-size: 2.25rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    color: var(--brand-surface);
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  /* Критические кнопки */
+  .btn-primary {
+    background-color: var(--brand-accent);
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--brand-radius-lg);
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--brand-primary);
+  }
+  
+  .btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--brand-accent);
+    color: var(--brand-accent);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--brand-radius-lg);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+  }
+  
+  .btn-secondary:hover {
+    background-color: var(--brand-accent);
+    color: white;
+  }
+  
+  /* Критические тени */
+  .shadow-elegant { 
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.25); 
+  }
+  
+  .shadow-glow { 
+    box-shadow: 0 0 0 3px rgba(58, 79, 46, 0.15), 0 15px 40px -15px rgba(58, 79, 46, 0.5); 
+  }
+  
+  /* Начальные состояния для анимаций */
+  .reveal-up { 
+    opacity: 0; 
+    transform: translateY(24px); 
+  }
+  
+  .reveal-fade { 
+    opacity: 0; 
+  }
+  
+  /* SplitType базовые стили */
+  .split-target { 
+    font-kerning: none; 
+  }
+  
+  .split-char { 
+    display: inline-block; 
+    opacity: 0; 
+    transform: translateY(12px); 
+  }
+  
+  .split-word { 
+    display: inline-block; 
+  }
+  
+  @keyframes split-rise { 
+    to { 
+      opacity: 1; 
+      transform: translateY(0); 
+    } 
+  }
+  
+  .split-in .split-char { 
+    animation: split-rise .6s ease-out both; 
+  }
+  
+  /* Критические анимации */
+  @keyframes fadeInUp {
+    from { 
+      opacity: 0; 
+      transform: translateY(24px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+  }
+  
+  .animate-fade-in-up { 
+    animation: fadeInUp .8s ease-out both; 
+  }
+  
+  /* Радиальный фон для hero */
+  .bg-radial-faded {
+    background: 
+      radial-gradient(1000px 500px at 50% 0%, rgba(255,255,255,0.06), transparent 60%),
+      var(--brand-primary-700);
+  }
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 2.5rem;
+  }
+}

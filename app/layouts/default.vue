@@ -1,5 +1,8 @@
 <template>
   <div class="min-h-screen relative text-white" style="background-color: var(--brand-primary-700);">
+    <!-- Предзагрузка критических ресурсов -->
+    <PreloadResources />
+    
     <!-- subtle decorative grid background -->
     <div class="pointer-events-none absolute inset-0 bg-grid bg-grid opacity-10"></div>
     <header>

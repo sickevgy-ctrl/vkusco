@@ -1,46 +1,116 @@
 # «Вкусная компания» — сайт ресторана
 
-Современный сайт ресторана, созданный на Nuxt.js с использованием Tailwind CSS.
-
-## 🚀 Функциональность
+Современный сайт ресторана, созданный на Nuxt.js с использованием Tailwind CSS.## 🚀 Функциональность
 
 - **Адаптивный дизайн** - отлично работает на всех устройствах
 - **Современный интерфейс** - использование Tailwind CSS для стилизации
 - **Интерактивное меню** - с фильтрацией по категориям и модальными окнами блюд
 - **Форма бронирования** - модальное окно для резервации столиков
-- **SEO-оптимизация** - мета-теги и правильная структура HTML
-- **Быстрая загрузка** - оптимизированные изображения и код
+- **SEO-оптимизация** - мета-теги, структурированные данные и правильная структура HTML
+- **Быстрая загрузка** - оптимизированные изображения, ленивая загрузка и современные форматы
+- **Анимации** - плавные переходы с GSAP и Lenis
+- **Производительность** - критический CSS, предзагрузка ресурсов и оптимизация изображений
+- **Управление контентом** - автоматизированные скрипты для меню и изображений
 
 ## 📁 Структура проекта
 
 ```
 vkusnayakompania/
-├── assets/
-│   └── css/
-│       └── main.css          # Глобальные стили
-├── components/
-│   ├── AppNavigation.vue     # Навигация сайта
-│   ├── AppFooter.vue         # Подвал сайта
-│   └── ReservationModal.vue  # Модальное окно бронирования
-├── layouts/
-│   └── default.vue           # Основной макет
-├── pages/
-│   ├── index.vue             # Главная страница
-│   ├── menu.vue              # Страница меню
-│   ├── about.vue             # О ресторане
-│   └── contact.vue           # Контакты
-├── public/                   # Статические файлы
-├── nuxt.config.ts            # Конфигурация Nuxt
-├── tailwind.config.js        # Конфигурация Tailwind
-└── package.json              # Зависимости проекта
+├── app/
+│   ├── assets/
+│   │   └── css/
+│   │       ├── critical.css      # Критический CSS
+│   │       └── main.css          # Глобальные стили
+│   ├── brand.config.ts           # Конфигурация бренда
+│   ├── components/
+│   │   ├── AppFooter.vue         # Подвал сайта
+│   │   ├── AppNavigation.vue     # Навигация сайта
+│   │   ├── GradualBlurCards.vue  # Карточки с размытием
+│   │   ├── HeroDishTw.vue        # Герой секция
+│   │   ├── OptimizedImage.vue    # Оптимизированные изображения
+│   │   ├── Plasma.vue           # Плазменный эффект
+│   │   ├── PreloadResources.vue  # Предзагрузка ресурсов
+│   │   ├── ReservationModal.vue # Модальное окно бронирования
+│   │   ├── ReservationPortal.vue# Портальное окно бронирования
+│   │   └── VoyageSlider.vue      # Слайдер путешествий
+│   ├── composables/
+│   │   ├── useGsapReveal.ts      # GSAP анимации
+│   │   ├── useHomePageAnimations.ts # Анимации главной страницы
+│   │   ├── useImageOptimization.ts # Оптимизация изображений
+│   │   ├── useLazyLoading.ts     # Ленивая загрузка
+│   │   ├── useLazyResources.ts   # Ленивые ресурсы
+│   │   ├── useLenis.ts           # Плавная прокрутка
+│   │   ├── useReservationModal.ts# Модальное окно бронирования
+│   │   ├── useSEO.ts             # SEO оптимизация
+│   │   └── useYandexReviews.ts   # Отзывы Яндекс
+│   ├── layouts/
+│   │   └── default.vue           # Основной макет
+│   ├── pages/
+│   │   ├── index.vue             # Главная страница
+│   │   ├── menu.vue              # Страница меню
+│   │   ├── about.vue             # О ресторане
+│   │   └── contact.vue           # Контакты
+│   └── plugins/
+│       ├── gsap.client.ts        # GSAP плагин
+│       ├── lenis.client.ts       # Lenis плагин
+│       ├── split-type.client.ts  # Split Type плагин
+│       ├── split-type.server.ts  # Split Type сервер
+│       └── vsplit.ts             # VSplit плагин
+├── data/
+│   └── menu.json                 # Данные меню
+├── public/
+│   ├── content/                  # Контентные изображения
+│   ├── images/
+│   │   ├── atmosphere/           # Изображения атмосферы
+│   │   └── dishes/              # Изображения блюд
+│   └── logo.svg                  # Логотип
+├── scripts/                      # Автоматизированные скрипты
+│   ├── images-manager.mjs        # Менеджер изображений
+│   ├── menu-manager.mjs          # Менеджер меню
+│   ├── optimizer.mjs            # Оптимизатор
+│   └── restaurant-manager.mjs    # Главный менеджер
+├── server/
+│   └── api/
+│       ├── menu.get.ts           # API меню
+│       ├── menu/
+│       │   └── update.post.ts    # API обновления меню
+│       └── yandex-reviews.get.ts # API отзывов Яндекс
+├── types/
+│   └── nuxt.d.ts                 # Типы Nuxt
+├── nuxt.config.ts                # Конфигурация Nuxt
+├── tailwind.config.js            # Конфигурация Tailwind
+└── package.json                  # Зависимости проекта
 ```
 
 ## 🛠 Технологии
 
-- **Nuxt.js 3** - фреймворк Vue.js для SSR
-- **Vue.js 3** - прогрессивный JavaScript фреймворк
+### Основной стек
+- **Nuxt 4** - современный фреймворк Vue.js для SSR/SSG
+- **Vue** - прогрессивный JavaScript фреймворк с Composition API
+- **TypeScript** - типизированный JavaScript
 - **Tailwind CSS** - utility-first CSS фреймворк
-- **Google Fonts** - красивые веб-шрифты (Montserrat, Cormorant Garamond)
+
+### Анимации и интерактивность
+- **GSAP** - профессиональная библиотека анимаций
+- **Lenis** - плавная прокрутка
+- **Split Type** - анимация текста
+
+### Оптимизация и производительность
+- **Sharp** - оптимизация изображений
+- **Критический CSS** - быстрая загрузка стилей
+- **Ленивая загрузка** - оптимизация ресурсов
+- **Современные форматы** - WebP, AVIF
+
+### SEO и мета-данные
+- **Структурированные данные** - Schema.org
+- **Open Graph** - социальные сети
+- **Sitemap** - карта сайта
+- **Robots.txt** - индексация
+
+### Шрифты и дизайн
+- **Google Fonts** - Montserrat, Cormorant Garamond
+- **Брендинг** - централизованная конфигурация
+- **Адаптивность** - мобильный подход
 
 ## 📋 Требования
 
@@ -74,6 +144,7 @@ vkusnayakompania/
 
 ## 📜 Доступные команды
 
+### Основные команды разработки
 ```bash
 # Разработка
 npm run dev
@@ -89,26 +160,144 @@ npm run generate
 
 # Подготовка типов
 npm run postinstall
+
+# Анализ бандла
+npm run analyze
+```
+
+### 🏠 Команды ресторана
+```bash
+# Инициализация проекта
+npm run restaurant:init
+
+# Настройка меню
+npm run restaurant:setup
+
+# Оптимизация изображений
+npm run restaurant:optimize
+
+# Обновление изображений
+npm run restaurant:update
+
+# Проверка состояния
+npm run restaurant:check
+
+# Полная перестройка
+npm run restaurant:rebuild
+
+# Очистка временных файлов
+npm run restaurant:cleanup
+```
+
+### 🍽️ Управление меню
+```bash
+# Парсинг меню с сайта
+npm run menu:parse
+
+# Создание меню из данных
+npm run menu:create
+
+# Добавление категорий
+npm run menu:add-categories
+
+# Обновление путей к изображениям
+npm run menu:update-images
+
+# Статистика меню
+npm run menu:stats
+```
+
+### 🖼️ Управление изображениями
+```bash
+# Создание изображений блюд
+npm run images:create-dishes
+
+# Создание простых изображений
+npm run images:create-simple
+
+# Создание заглушек
+npm run images:create-placeholders
+
+# Создание изображений атмосферы
+npm run images:create-atmosphere
+
+# Оптимизация изображений
+npm run images:optimize
+
+# Загрузка реальных изображений
+npm run images:download
+
+# Обновление путей
+npm run images:update-paths
+
+# Статистика изображений
+npm run images:stats
+```
+
+### ⚡ Оптимизация
+```bash
+# Оптимизация всех изображений
+npm run optimize:all
+
+# Оптимизация изображений блюд
+npm run optimize:dishes
+
+# Создание современных форматов
+npm run optimize:modern
+
+# Проверка качества оптимизации
+npm run optimize:check
+
+# Очистка временных файлов
+npm run optimize:cleanup
+
+# Полная оптимизация
+npm run optimize:full
 ```
 
 ## 🎨 Кастомизация
 
+### Брендинг и конфигурация
+
+Все настройки бренда централизованы в `app/brand.config.ts`:
+- **Цвета** - основная палитра ресторана
+- **Шрифты** - типографика и веса
+- **Радиусы** - скругления элементов
+
 ### Цвета и стили
 
-Основные цвета определены в `assets/css/main.css` как CSS‑переменные и подключены к Tailwind через `tailwind.config.js` (палитра `primary`).
-Вы можете изменить их в `:root` (переменные `--brand-primary`, `--brand-primary-600`, `--brand-primary-700`, `--brand-accent`).
+Основные цвета определены в `app/brand.config.ts` и автоматически применяются через Tailwind CSS:
+- `primary` - основной цвет бренда
+- `primary600` - темный оттенок
+- `primary700` - самый темный оттенок
+- `accent` - акцентный цвет
+- `surface` - цвет фона
+- `muted` - приглушенный цвет
 
 ### Шрифты
 
-Используются два шрифта:
-- **Montserrat** — для основного текста и интерфейса
-- **Cormorant Garamond** — для заголовков
+Используются два шрифта из Google Fonts:
+- **Montserrat** — для основного текста и интерфейса (300, 500, 900)
+- **Cormorant Garamond** — для заголовков (400, 700)
 
 Настройка в `nuxt.config.ts` через модуль `@nuxtjs/google-fonts`.
 
 ### Компоненты
 
-Все компоненты расположены в папке `components/` и автоматически импортируются Nuxt.js.
+Все компоненты расположены в папке `app/components/` и автоматически импортируются Nuxt.js:
+- **Базовые** - AppNavigation, AppFooter
+- **Интерактивные** - ReservationModal, ReservationPortal
+- **Анимационные** - GradualBlurCards, HeroDishTw, Plasma
+- **Оптимизированные** - OptimizedImage, PreloadResources
+- **Специализированные** - VoyageSlider
+
+### Composables
+
+Переиспользуемая логика в `app/composables/`:
+- **Анимации** - useGsapReveal, useHomePageAnimations
+- **Оптимизация** - useImageOptimization, useLazyLoading, useLazyResources
+- **Интерактивность** - useLenis, useReservationModal
+- **SEO** - useSEO, useYandexReviews
 
 ## 📱 Страницы
 
@@ -139,16 +328,104 @@ npm run postinstall
 
 ## 🚀 Деплой
 
-### Статическая генерация
+### Статическая генерация (рекомендуется)
 ```bash
 npm run generate
 ```
+Создает статические файлы в папке `.output/public/` для хостинга на CDN.
 
 ### SSR/SPA
 ```bash
 npm run build
 npm run preview
 ```
+Для серверного рендеринга или SPA режима.
+
+### Оптимизация для продакшена
+```bash
+# Полная оптимизация изображений
+npm run optimize:full
+
+# Проверка качества
+npm run optimize:check
+
+# Анализ бандла
+npm run analyze
+```
+
+## 🔧 Автоматизация и скрипты
+
+### Управление контентом
+Проект включает мощную систему автоматизации для управления контентом:
+
+- **Менеджер ресторана** - полная настройка проекта
+- **Менеджер меню** - парсинг и управление меню
+- **Менеджер изображений** - создание и оптимизация изображений
+- **Оптимизатор** - автоматическая оптимизация ресурсов
+
+### Быстрая настройка нового проекта
+```bash
+# 1. Инициализация
+npm run restaurant:init
+
+# 2. Настройка меню
+npm run restaurant:setup
+
+# 3. Проверка состояния
+npm run restaurant:check
+```
+
+### Обновление контента
+```bash
+# Обновление изображений
+npm run restaurant:update
+
+# Оптимизация
+npm run restaurant:optimize
+
+# Проверка
+npm run restaurant:check
+```
+
+## ⚡ Производительность
+
+### Оптимизации
+- **Критический CSS** - быстрая загрузка стилей
+- **Ленивая загрузка** - изображения загружаются по требованию
+- **Современные форматы** - WebP, AVIF для лучшего сжатия
+- **Предзагрузка ресурсов** - критически важные ресурсы загружаются первыми
+- **Оптимизация изображений** - автоматическое сжатие и конвертация
+
+### Метрики
+- **LCP** - оптимизирован для быстрой загрузки главного контента
+- **CLS** - стабильная верстка без сдвигов
+- **FID** - быстрая реакция на взаимодействие
+- **SEO** - полная оптимизация для поисковых систем
+
+## 🔍 API и интеграции
+
+### Встроенные API
+- **`/api/menu`** - получение меню ресторана
+- **`/api/menu/update`** - обновление меню
+- **`/api/yandex-reviews`** - интеграция с отзывами Яндекс
+
+### Внешние сервисы
+- **Google Fonts** - веб-шрифты
+- **Яндекс.Карты** - геолокация и отзывы
+- **Schema.org** - структурированные данные
+
+## 📊 Мониторинг и аналитика
+
+### Встроенные инструменты
+- **Nuxt DevTools** - отладка в режиме разработки
+- **Bundle Analyzer** - анализ размера бандла
+- **Performance Monitoring** - мониторинг производительности
+
+### SEO инструменты
+- **Sitemap** - автоматическая генерация карты сайта
+- **Robots.txt** - настройка индексации
+- **Meta теги** - полная SEO оптимизация
+- **Структурированные данные** - Schema.org разметка
 
 ## 📧 Обратная связь
 

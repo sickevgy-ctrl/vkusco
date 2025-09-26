@@ -1,0 +1,62 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- Градиент для фона -->
+      <linearGradient id="gradient-bar-counter" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#DAA520;stop-opacity:0.1" />
+        <stop offset="50%" style="stop-color:#DAA520;stop-opacity:0.05" />
+        <stop offset="100%" style="stop-color:#DAA520;stop-opacity:0.15" />
+      </linearGradient>
+      
+      <!-- Тень -->
+      <filter id="shadow-bar-counter" x="-50%" y="-50%" width="200%" height="200%">
+        <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="rgba(0,0,0,0.3)"/>
+      </filter>
+      
+      <!-- Градиент для помещения -->
+      <radialGradient id="room-bar-counter" cx="50%" cy="40%" r="70%">
+        <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.95" />
+        <stop offset="70%" style="stop-color:#f8f8f8;stop-opacity:0.9" />
+        <stop offset="100%" style="stop-color:#e8e8e8;stop-opacity:0.85" />
+      </radialGradient>
+    </defs>
+    
+    <!-- Фон -->
+    <rect width="1200" height="800" fill="url(#gradient-bar-counter)"/>
+    
+    <!-- Декоративные элементы фона -->
+    <circle cx="150" cy="150" r="100" fill="#DAA520" fill-opacity="0.03"/>
+    <circle cx="1050" cy="650" r="120" fill="#DAA520" fill-opacity="0.05"/>
+    <circle cx="1000" cy="200" r="80" fill="#DAA520" fill-opacity="0.04"/>
+    <circle cx="200" cy="600" r="90" fill="#DAA520" fill-opacity="0.06"/>
+    
+    <!-- Помещение -->
+    <rect x="100" y="100" width="1000" height="600" fill="url(#room-bar-counter)" filter="url(#shadow-bar-counter)" rx="20"/>
+    
+    <!-- Стены -->
+    <rect x="100" y="100" width="1000" height="50" fill="#DAA520" fill-opacity="0.1"/>
+    <rect x="100" y="100" width="50" height="600" fill="#DAA520" fill-opacity="0.08"/>
+    <rect x="1050" y="100" width="50" height="600" fill="#DAA520" fill-opacity="0.08"/>
+    <rect x="100" y="650" width="1000" height="50" fill="#DAA520" fill-opacity="0.12"/>
+    
+    <!-- Центральный элемент -->
+    <rect x="400" y="300" width="400" height="200" fill="#DAA520" fill-opacity="0.2" rx="10"/>
+    
+    <!-- Эмодзи атмосферы -->
+    <text x="600" y="420" font-family="Arial, sans-serif" font-size="120" text-anchor="middle" dominant-baseline="middle" filter="url(#shadow-bar-counter)">🍸</text>
+    
+    <!-- Название -->
+    <text x="600" y="550" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#DAA520" text-anchor="middle" dominant-baseline="middle" filter="url(#shadow-bar-counter)">Барная стойка</text>
+    
+    <!-- Описание -->
+    <text x="600" y="590" font-family="Arial, sans-serif" font-size="24" fill="#DAA520" text-anchor="middle" dominant-baseline="middle" fill-opacity="0.8">Элегантная барная стойка с широким выбором напитков</text>
+    
+    <!-- Декоративная рамка -->
+    <rect x="50" y="50" width="1100" height="700" fill="none" stroke="#DAA520" stroke-width="4" stroke-opacity="0.3" rx="30"/>
+    <rect x="60" y="60" width="1080" height="680" fill="none" stroke="#DAA520" stroke-width="2" stroke-opacity="0.2" rx="25"/>
+    
+    <!-- Угловые декоративные элементы -->
+    <circle cx="120" cy="120" r="20" fill="#DAA520" fill-opacity="0.4"/>
+    <circle cx="1080" cy="120" r="20" fill="#DAA520" fill-opacity="0.4"/>
+    <circle cx="120" cy="680" r="20" fill="#DAA520" fill-opacity="0.4"/>
+    <circle cx="1080" cy="680" r="20" fill="#DAA520" fill-opacity="0.4"/>
+  </svg>
