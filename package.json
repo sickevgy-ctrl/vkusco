@@ -1,0 +1,70 @@
+{
+  "name": "vkusnayakompania",
+  "version": "1.2.0",
+  "description": "«Вкусная компания» — современный сайт ресторана на Nuxt 3",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sickevgy-ctrl/vkusco.git"
+  },
+  "homepage": "https://github.com/sickevgy-ctrl/vkusco#readme",
+  "bugs": {
+    "url": "https://github.com/sickevgy-ctrl/vkusco/issues"
+  },
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "analyze": "nuxt analyze",
+    "build:analyze": "nuxt build --analyze",
+    "restaurant:init": "node scripts/restaurant-manager.mjs init",
+    "restaurant:setup": "node scripts/restaurant-manager.mjs setup-menu",
+    "restaurant:optimize": "node scripts/restaurant-manager.mjs optimize",
+    "restaurant:update": "node scripts/restaurant-manager.mjs update-images",
+    "restaurant:check": "node scripts/restaurant-manager.mjs check",
+    "restaurant:rebuild": "node scripts/restaurant-manager.mjs rebuild",
+    "restaurant:cleanup": "node scripts/restaurant-manager.mjs cleanup",
+    "menu:parse": "node scripts/menu-manager.mjs parse",
+    "menu:create": "node scripts/menu-manager.mjs create",
+    "menu:add-categories": "node scripts/menu-manager.mjs add-categories",
+    "menu:update-images": "node scripts/menu-manager.mjs update-images",
+    "menu:stats": "node scripts/menu-manager.mjs stats",
+    "images:create-dishes": "node scripts/images-manager.mjs create-dishes",
+    "images:create-simple": "node scripts/images-manager.mjs create-simple",
+    "images:create-placeholders": "node scripts/images-manager.mjs create-placeholders",
+    "images:create-atmosphere": "node scripts/images-manager.mjs create-atmosphere",
+    "images:optimize": "node scripts/images-manager.mjs optimize",
+    "images:download": "node scripts/images-manager.mjs download",
+    "images:update-paths": "node scripts/images-manager.mjs update-paths",
+    "images:stats": "node scripts/images-manager.mjs stats",
+    "optimize:all": "node scripts/optimizer.mjs all",
+    "optimize:dishes": "node scripts/optimizer.mjs dishes",
+    "optimize:modern": "node scripts/optimizer.mjs modern",
+    "optimize:check": "node scripts/optimizer.mjs check",
+    "optimize:cleanup": "node scripts/optimizer.mjs cleanup",
+    "optimize:full": "node scripts/optimizer.mjs full"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/tailwindcss": "^6.8.4",
+    "jsdom": "^24.1.3",
+    "nuxt": "4.1.2",
+    "sharp": "^0.33.5"
+  },
+  "dependencies": {
+    "@nuxtjs/google-fonts": "^3.0.2",
+    "@nuxtjs/robots": "^5.5.5",
+    "@nuxtjs/sitemap": "^7.4.7",
+    "@tresjs/cientos": "^5.0.0",
+    "@tresjs/core": "^5.0.2",
+    "gsap": "^3.13.0",
+    "lenis": "^1.3.11",
+    "maath": "^0.10.8",
+    "ogl": "^1.0.11",
+    "puppeteer": "^24.22.3",
+    "split-type": "^0.3.4",
+    "three": "^0.180.0"
+  }
+}
