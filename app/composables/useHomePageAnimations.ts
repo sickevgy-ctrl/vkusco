@@ -83,6 +83,7 @@ export function useHomePageAnimations() {
 
   // Анимации для секций с ScrollTrigger
   const initSectionAnimations = () => {
+    // Управление "Наш интерьер" перенесено на страницу index.vue через refs, чтобы избежать дубля
     // Анимация секции "О ресторане"
     const aboutSection = document.querySelector('section[aria-labelledby="about-title"]')
     if (aboutSection) {
@@ -155,32 +156,7 @@ export function useHomePageAnimations() {
       timelines.value.push(popularTl)
     }
 
-    // Анимация атмосферы
-    const atmosphereSection = document.querySelector('section[aria-labelledby="atmosphere-title"]')
-    if (atmosphereSection) {
-      const atmosphereTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: atmosphereSection,
-          start: 'top 70%',
-          once: true
-        }
-      })
-
-      const title = atmosphereSection.querySelector('h2')
-      const images = atmosphereSection.querySelectorAll('img')
-
-      if (title) {
-        gsap.set(title, { opacity: 0, y: 50, clearProps: 'transform' })
-        atmosphereTl.to(title, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' })
-      }
-
-      if (images.length > 0) {
-        gsap.set(images, { opacity: 0, scale: 1.1 })
-        atmosphereTl.to(images, { opacity: 1, scale: 1, duration: 1.2, stagger: 0.1, ease: 'power3.out' }, '-=0.7')
-      }
-
-      timelines.value.push(atmosphereTl)
-    }
+    // Блок "Наша атмосфера" удалён
 
     // Анимация отзывов
     const reviewsSection = document.querySelector('section[aria-labelledby="reviews-title"]')
@@ -286,26 +262,7 @@ export function useHomePageAnimations() {
       timelines.value.push(imageParallax)
     }
 
-    // Параллакс для изображений атмосферы
-    const atmosphereImages = document.querySelectorAll('section[aria-labelledby="atmosphere-title"] img')
-    atmosphereImages.forEach((img, index) => {
-      const imgParallax = gsap.timeline({
-        scrollTrigger: {
-          trigger: img,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 2
-        }
-      })
-
-      const speed = index % 2 === 0 ? -15 : -25
-      imgParallax.to(img, {
-        yPercent: speed,
-        ease: 'none'
-      })
-
-      timelines.value.push(imgParallax)
-    })
+    // Блок "Наша атмосфера" удалён
 
     // Floating анимация для карточек блюд при скролле
     const dishCards = document.querySelectorAll('.dish-card')
@@ -479,33 +436,7 @@ export function useHomePageAnimations() {
       })
     })
 
-    // Hover эффект для изображений атмосферы
-    const atmosphereImages = document.querySelectorAll('section[aria-labelledby="atmosphere-title"] .group')
-    atmosphereImages.forEach(container => {
-      const image = container.querySelector('img')
-      
-      container.addEventListener('mouseenter', () => {
-        if (image) {
-          gsap.to(image, {
-            scale: 1.1,
-            rotation: 2,
-            duration: 0.5,
-            ease: 'power2.out'
-          })
-        }
-      })
-
-      container.addEventListener('mouseleave', () => {
-        if (image) {
-          gsap.to(image, {
-            scale: 1,
-            rotation: 0,
-            duration: 0.5,
-            ease: 'power2.out'
-          })
-        }
-      })
-    })
+    // Блок "Наша атмосфера" удалён
   }
 
   // Добавим анимацию счетчиков (для будущего использования)
@@ -573,6 +504,23 @@ export function useHomePageAnimations() {
     nextTick(() => {
       if (heroRef) {
         initHeroAnimations(heroRef)
+        // Плавный наезд секции "О нас" при статичном герое
+        const container = document.querySelector('.stacked-hero') as HTMLElement | null
+        const stackedContent = document.querySelector('.stacked-content') as HTMLElement | null
+        if (container && stackedContent) {
+          // Сдвигаем всё полотно (О нас + Популярные) единообразно
+          gsap.set(stackedContent, { yPercent: 100 })
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: container,
+              start: 'top top',
+              end: 'bottom top',
+              scrub: true
+            }
+          })
+          tl.to(stackedContent, { yPercent: 0, ease: 'none' })
+          timelines.value.push(tl)
+        }
       }
       initSectionAnimations()
       initParallaxEffects()

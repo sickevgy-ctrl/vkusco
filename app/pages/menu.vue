@@ -39,7 +39,7 @@
           <div class="min-h-[calc(100vh-9rem)] flex items-center justify-center">
             <div class="text-center">
               <p class="text-white mb-4">Меню не загружено</p>
-              <button @click="loadMenuData" class="btn-primary">Попробовать снова</button>
+              <button @click="loadMenuData" class="btn btn-primary">Попробовать снова</button>
             </div>
           </div>
         </div>
@@ -128,10 +128,10 @@
             </div>
           </div>
           <div class="flex space-x-4">
-            <button class="btn-primary flex-1 shadow-glow">
+            <button class="btn btn-primary flex-1 shadow-glow">
               Добавить в заказ
             </button>
-            <button class="btn-secondary px-6">
+            <button class="btn btn-secondary">
               Поделиться
             </button>
           </div>
@@ -149,7 +149,7 @@
         <p v-split="{ types: 'words, chars', delayStep: 0.015 }" class="text-xl mb-10">
           Забронируйте столик и насладитесь нашими изысканными блюдами
         </p>
-        <button v-split="{ types: 'words, chars', delayStep: 0.012, threshold: 0 }" class="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-4 px-10 rounded-xl transition-colors duration-300 shadow-glow" @click="isReservationOpen = true">
+        <button v-split="{ types: 'words, chars', delayStep: 0.012, threshold: 0 }" class="btn btn-primary shadow-glow" @click="isReservationOpen = true">
           Забронировать столик
         </button>
       </div>

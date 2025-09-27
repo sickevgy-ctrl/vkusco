@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, computed, readonly } from 'vue'
 
 export interface YandexReview {
   id: string
@@ -24,12 +24,44 @@ export const useYandexReviews = () => {
   const totalCount = ref(0)
   const averageRating = ref(0)
 
+  // Кэширование на 1 час
+  const CACHE_KEY = 'yandexReviews:cache'
+  const CACHE_TTL_MS = 60 * 60 * 1000 // 1 час
+
+  type CachePayload = {
+    data: YandexReviewsResponse
+    timestamp: number
+  }
+
+  const canUseStorage = () => typeof window !== 'undefined' && typeof window.localStorage !== 'undefined'
+  const loadCache = (): CachePayload | null => {
+    try {
+      if (!canUseStorage()) return null
+      const raw = window.localStorage.getItem(CACHE_KEY)
+      if (!raw) return null
+      return JSON.parse(raw) as CachePayload
+    } catch {
+      return null
+    }
+  }
+  const saveCache = (payload: YandexReviewsResponse) => {
+    try {
+      if (!canUseStorage()) return
+      const toStore: CachePayload = { data: payload, timestamp: Date.now() }
+      window.localStorage.setItem(CACHE_KEY, JSON.stringify(toStore))
+    } catch {
+      // игнорируем ошибки записи
+    }
+  }
+
   // Вычисляемые свойства
   const hasReviews = computed(() => reviews.value.length > 0)
-  const recentReviews = computed(() => 
+  // Ограничиваем отображение не более 3 отзывов за раз
+  const recentReviews = computed(() =>
     reviews.value
+      .slice() // чтобы не мутировать исходный массив при sort
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-      .slice(0, 6)
+      .slice(0, 3)
   )
   const topRatedReviews = computed(() =>
     reviews.value
@@ -42,33 +74,55 @@ export const useYandexReviews = () => {
   const fetchReviews = async (forceRefresh = false) => {
     if (isLoading.value && !forceRefresh) return
 
+    // Проверяем кэш, если не требуется форс-обновление
+    if (!forceRefresh) {
+      const cache = loadCache()
+      if (cache && Date.now() - cache.timestamp < CACHE_TTL_MS) {
+        const { reviews: cachedReviews, totalCount: cachedTotal, averageRating: cachedAvg, lastUpdated: cachedUpdated } = cache.data
+        reviews.value = cachedReviews
+        totalCount.value = cachedTotal
+        averageRating.value = cachedAvg
+        lastUpdated.value = cachedUpdated
+        return
+      }
+    }
+
     isLoading.value = true
     error.value = null
 
     try {
       const response = await $fetch<YandexReviewsResponse>('/api/yandex-reviews')
       
-      reviews.value = response.reviews
-      totalCount.value = response.totalCount
-      averageRating.value = response.averageRating
-      lastUpdated.value = response.lastUpdated
+  reviews.value = response.reviews
+  totalCount.value = response.totalCount
+  averageRating.value = response.averageRating
+  lastUpdated.value = response.lastUpdated
+  // Сохраняем в кэш
+  saveCache(response)
       
       console.log(`Загружено ${response.reviews.length} отзывов с Яндекс.Карт`)
       
     } catch (err) {
       console.error('Ошибка загрузки отзывов:', err)
       error.value = 'Не удалось загрузить отзывы'
-      
-      // Используем fallback отзывы при ошибке
-      const fallbackReviews = getFallbackReviews()
-      reviews.value = fallbackReviews
-      totalCount.value = fallbackReviews.length
-      
-      // Правильно рассчитываем средний рейтинг для fallback отзывов
-      const totalRating = fallbackReviews.reduce((sum, review) => sum + review.rating, 0)
-      averageRating.value = totalRating / fallbackReviews.length
-      
-      lastUpdated.value = new Date().toISOString()
+
+      // Пытаемся достать кэш при ошибке
+      const cache = loadCache()
+      if (cache) {
+        const { reviews: cachedReviews, totalCount: cachedTotal, averageRating: cachedAvg, lastUpdated: cachedUpdated } = cache.data
+        reviews.value = cachedReviews
+        totalCount.value = cachedTotal
+        averageRating.value = cachedAvg
+        lastUpdated.value = cachedUpdated
+      } else {
+        // Используем fallback отзывы при отсутствии кэша
+        const fallbackReviews = getFallbackReviews()
+        reviews.value = fallbackReviews
+        totalCount.value = fallbackReviews.length
+        const totalRating = fallbackReviews.reduce((sum, review) => sum + review.rating, 0)
+        averageRating.value = totalRating / fallbackReviews.length
+        lastUpdated.value = new Date().toISOString()
+      }
     } finally {
       isLoading.value = false
     }

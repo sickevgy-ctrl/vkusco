@@ -20,6 +20,7 @@ const openRef = ref(false)
 
 // Refs для анимаций
 const panelRef = ref(null)
+const wrapperRef = ref(null)
 const preLayersRef = ref(null)
 const preLayerElsRef = ref([])
 const plusHRef = ref(null)
@@ -189,6 +190,10 @@ const playOpen = () => {
   busyRef.value = true
   const tl = buildOpenTimeline()
   if (tl) {
+    // Обновляем высоту панели под контент с ограничением по вьюпорту
+    nextTick(() => updatePanelSize())
+    window.addEventListener('resize', updatePanelSize, { passive: true })
+
     tl.eventCallback('onComplete', () => {
       busyRef.value = false
     })
@@ -218,6 +223,11 @@ const playClose = () => {
     ease: 'power3.in',
     overwrite: 'auto',
     onComplete: () => {
+      // Сбрасываем вычисленную высоту, отписываемся от ресайза
+      const wrap = wrapperRef.value
+      if (wrap) wrap.style.removeProperty('--sm-panel-h')
+      window.removeEventListener('resize', updatePanelSize)
+
       const itemEls = Array.from(panel.querySelectorAll('.sm-panel-itemLabel'))
       if (itemEls.length) gsap.set(itemEls, { yPercent: 140, rotate: 10 })
 
@@ -232,6 +242,18 @@ const playClose = () => {
       busyRef.value = false
     }
   })
+}
+
+// Вычисление высоты панели по контенту (с ограничением 85vh)
+const updatePanelSize = () => {
+  const panel = panelRef.value
+  const wrap = wrapperRef.value
+  if (!panel || !wrap) return
+  // Естественная высота контента
+  const contentH = panel.scrollHeight
+  const maxH = Math.floor(window.innerHeight * 0.85)
+  const targetH = Math.min(contentH, maxH)
+  wrap.style.setProperty('--sm-panel-h', `${targetH}px`)
 }
 
 const animateIcon = (opening) => {
@@ -321,6 +343,7 @@ const toggleMenu = () => {
 <template>
   <div class="sm-scope w-full h-full">
     <div
+      ref="wrapperRef"
       class="staggered-menu-wrapper relative w-full h-full z-40"
       :style="accentColor ? { ['--sm-accent']: accentColor } : undefined"
       :data-position="position"
@@ -329,7 +352,7 @@ const toggleMenu = () => {
       <!-- Pre-layers -->
       <div
         ref="preLayersRef"
-        class="sm-prelayers fixed top-0 left-0 w-full h-1/2 pointer-events-none z-[5]"
+        class="sm-prelayers fixed top-0 right-0 left-auto pointer-events-none z-[5]"
         aria-hidden="true"
       >
         <div
@@ -341,7 +364,7 @@ const toggleMenu = () => {
       </div>
 
       <!-- Логотип (не закреплен) -->
-      <div class="sm-logo-container absolute top-0 left-0 pt-2 px-8 pb-8 bg-transparent pointer-events-none z-20">
+  <div class="sm-logo-container absolute top-0 left-0 px-8 bg-transparent pointer-events-none z-20">
         <div class="sm-logo flex items-center select-none pointer-events-auto" aria-label="Logo">
           <NuxtLink to="/" class="flex items-center">
             <picture>
@@ -362,7 +385,7 @@ const toggleMenu = () => {
       </div>
 
       <!-- Кнопка меню (закреплена) -->
-      <div class="sm-menu-button-container fixed top-0 right-0 pt-2 px-8 pb-8 bg-transparent pointer-events-none z-20">
+  <div class="sm-menu-button-container fixed top-0 right-0 px-8 bg-transparent pointer-events-none z-20">
         <button
           ref="toggleBtnRef"
           class="sm-toggle relative inline-flex items-center gap-[0.3rem] bg-transparent border-0 cursor-pointer text-[#e9e9ef] font-medium leading-none overflow-visible pointer-events-auto"
@@ -409,7 +432,7 @@ const toggleMenu = () => {
       <aside
         id="staggered-menu-panel"
         ref="panelRef"
-        class="staggered-menu-panel fixed top-0 left-0 w-full h-1/2 flex flex-col p-[6em_2em_2em_2em] overflow-y-auto z-10 backdrop-blur-[12px]"
+        class="staggered-menu-panel fixed top-0 right-0 left-auto flex flex-col p-[6em_2em_2em_2em] overflow-hidden z-10 backdrop-blur-[12px]"
         :style="{ 
           WebkitBackdropFilter: 'blur(12px)',
           backgroundColor: 'var(--brand-primary-700)'
@@ -479,8 +502,9 @@ const toggleMenu = () => {
 
 <style scoped>
 .sm-scope .staggered-menu-wrapper { position: relative; width: 100%; height: 100%; z-index: 40; }
-.sm-scope .sm-logo-container { position: absolute; top: 0; left: 0; padding: 0.5rem 2rem 2rem 2rem; background: transparent; pointer-events: none; z-index: 20; }
-.sm-scope .sm-menu-button-container { position: fixed; top: 0; right: 0; padding: 0.5rem 2rem 2rem 2rem; background: transparent; pointer-events: none; z-index: 20; }
+.sm-scope .staggered-menu-wrapper { --sm-panel-w: clamp(320px, 92vw, 720px); --sm-topbar-h: clamp(56px, 8vw, 76px); }
+.sm-scope .sm-logo-container { position: absolute; top: 0; left: 0; height: var(--sm-topbar-h); padding: 0 2rem; display: flex; align-items: center; background: transparent; pointer-events: none; z-index: 20; }
+.sm-scope .sm-menu-button-container { position: fixed; top: 0; right: 0; height: var(--sm-topbar-h); padding: 0 2rem; display: flex; align-items: center; background: transparent; pointer-events: none; z-index: 20; }
 .sm-scope .sm-logo-container > * { pointer-events: auto; }
 .sm-scope .sm-menu-button-container > * { pointer-events: auto; }
 .sm-scope .sm-logo { display: flex; align-items: center; user-select: none; }
@@ -493,9 +517,9 @@ const toggleMenu = () => {
 .sm-scope .sm-icon { position: relative; width: 14px; height: 14px; flex: 0 0 14px; display: inline-flex; align-items: center; justify-content: center; will-change: transform; }
 .sm-scope .sm-panel-itemWrap { position: relative; overflow: hidden; line-height: 1; }
 .sm-scope .sm-icon-line { position: absolute; left: 50%; top: 50%; width: 100%; height: 2px; background: currentColor; border-radius: 2px; transform: translate(-50%, -50%); will-change: transform; }
-.sm-scope .staggered-menu-panel { position: fixed; top: 0; left: 0; width: 100%; height: 50vh; background: var(--brand-primary-700); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; flex-direction: column; padding: 6em 2em 2em 2em; overflow-y: auto; z-index: 10; }
+.sm-scope .staggered-menu-panel { position: fixed; top: 0; right: 0; left: auto; width: var(--sm-panel-w); max-width: 720px; height: var(--sm-panel-h, auto); max-height: 85vh; background: var(--brand-primary-700); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; flex-direction: column; padding: 6em 2em 2em 2em; overflow: hidden; z-index: 10; }
 .sm-scope [data-position='left'] .staggered-menu-panel { right: auto; left: 0; }
-.sm-scope .sm-prelayers { position: fixed; top: 0; left: 0; width: 100%; height: 50vh; pointer-events: none; z-index: 5; }
+.sm-scope .sm-prelayers { position: fixed; top: 0; right: 0; left: auto; width: var(--sm-panel-w); height: var(--sm-panel-h, 85vh); pointer-events: none; z-index: 5; }
 .sm-scope [data-position='left'] .sm-prelayers { right: auto; left: 0; }
 .sm-scope .sm-prelayer { position: absolute; top: 0; left: 0; height: 100%; width: 100%; transform: translateX(0); }
 .sm-scope .sm-panel-inner { flex: 1; display: flex; flex-direction: column; gap: 1.25rem; }
@@ -511,7 +535,7 @@ const toggleMenu = () => {
 .sm-scope .sm-socials-link { font-size: 1.2rem; font-weight: 500; color: #fff; text-decoration: none; position: relative; padding: 2px 0; display: inline-block; transition: color 0.3s ease, opacity 0.3s ease; }
 .sm-scope .sm-socials-link:hover { color: #3A4F2E; }
 .sm-scope .sm-panel-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
-.sm-scope .sm-panel-item { position: relative; color: #fff; font-weight: 600; font-size: 2.5rem; cursor: pointer; line-height: 1; letter-spacing: -2px; text-transform: uppercase; transition: background 0.25s, color 0.25s; display: inline-block; text-decoration: none; padding-right: 1.4em; }
+.sm-scope .sm-panel-item { position: relative; color: #fff; font-weight: 600; font-size: clamp(1.5rem, 4.5vw, 2.5rem); cursor: pointer; line-height: 1; letter-spacing: -2px; text-transform: uppercase; transition: background 0.25s, color 0.25s; display: inline-block; text-decoration: none; padding-right: 1.4em; }
 .sm-scope .sm-panel-itemLabel { display: inline-block; will-change: transform; transform-origin: 50% 100%; }
 .sm-scope .sm-panel-item:hover { color: #3A4F2E; }
 .sm-scope .sm-panel-list[data-numbering] { counter-reset: smItem; }

@@ -170,7 +170,7 @@
             <button 
               type="submit" 
               :disabled="isSubmitting"
-              class="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+              class="w-full btn btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {{ isSubmitting ? 'Отправка...' : 'Отправить сообщение' }}
             </button>
@@ -256,7 +256,7 @@
           Позвоните нам или забронируйте столик онлайн
         </p>
         <div class="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
-          <button v-split="{ types: 'words, chars', delayStep: 0.012, threshold: 0 }" class="btn-primary shadow-glow" @click="isReservationOpen = true">Забронировать онлайн</button>
+          <button v-split="{ types: 'words, chars', delayStep: 0.012, threshold: 0 }" class="btn btn-primary shadow-glow" @click="isReservationOpen = true">Забронировать онлайн</button>
           <a v-split="{ types: 'words, chars', delayStep: 0.012, threshold: 0 }"
             href="tel:+79171421574"
             class="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-3 px-8 rounded-lg transition-all duration-300 inline-block"

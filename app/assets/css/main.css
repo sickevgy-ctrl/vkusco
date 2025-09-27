@@ -24,6 +24,7 @@
     color: #e5e7eb; /* light gray for readability on dark bg */
     margin: 0;
     padding: 0;
+    overflow-x: hidden; /* prevent horizontal scroll */
   }
   
   /* Убираем любые отступы у основных элементов */
@@ -41,6 +42,26 @@
 }
 
 @layer components {
+  /* Базовая прозрачная адаптивная кнопка */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    line-height: 1;
+    border-radius: var(--brand-radius-lg);
+    padding: clamp(0.625rem, 1.6vw, 0.9rem) clamp(1rem, 3vw, 1.5rem);
+    font-size: clamp(0.95rem, 1.4vw, 1.125rem);
+    min-height: clamp(40px, 6vw, 52px);
+    text-decoration: none;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+    background-color: transparent;
+    border: 2px solid currentColor;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn:focus-visible { outline: 2px solid rgba(255,255,255,0.6); outline-offset: 3px; }
   /* Section theme swap helper */
   .theme-swap {
     transition: background-color 600ms ease, color 600ms ease;
@@ -115,40 +136,10 @@
   .reveal-up { opacity: 0; transform: translateY(24px); }
   .reveal-fade { opacity: 0; }
 
-  .btn-primary {
-    background-color: var(--brand-accent);
-    color: white;
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--brand-radius-lg);
-    transition: background-color 0.3s ease;
-    border: none;
-    cursor: pointer;
-    display: inline-block;
-    text-decoration: none;
-  }
-  
-  .btn-primary:hover {
-    background-color: var(--brand-primary);
-  }
-  
-  .btn-secondary {
-    background-color: transparent;
-    border: 2px solid var(--brand-accent);
-    color: var(--brand-accent);
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--brand-radius-lg);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    display: inline-block;
-    text-decoration: none;
-  }
-  
-  .btn-secondary:hover {
-    background-color: var(--brand-accent);
-    color: white;
-  }
+  .btn-primary { color: var(--brand-accent); border-color: var(--brand-accent); background-color: transparent; }
+  .btn-primary:hover { background-color: rgba(111, 143, 75, 0.12); }
+  .btn-secondary { color: var(--brand-accent); border-color: var(--brand-accent); background-color: transparent; }
+  .btn-secondary:hover { background-color: rgba(111, 143, 75, 0.12); }
   
   /* Generic section card shell */
   .section-card {
@@ -162,6 +153,8 @@
   /* First section (hero) with plasma background */
   .section-card:first-of-type {
     background: transparent;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
   
   .section-title {

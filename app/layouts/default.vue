@@ -8,7 +8,7 @@
     <header>
       <AppNavigation />
     </header>
-    <main id="main-content" class="pt-16" style="background-color: var(--brand-primary-700);">
+    <main id="main-content" :class="route.path === '/' ? 'pt-0' : 'pt-16'" style="background-color: var(--brand-primary-700);">
       <slot />
     </main>
     <AppFooter />
@@ -22,6 +22,7 @@
 import brand from '~/brand.config'
 
 const url = useRequestURL()
+const route = useRoute()
 const origin = `${url.protocol}//${url.host}`
 const organizationId = `${origin}/#organization`
 

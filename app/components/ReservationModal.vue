@@ -147,7 +147,7 @@
           <button 
             type="submit" 
             :disabled="isSubmitting"
-            class="flex-1 btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+            class="flex-1 btn btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {{ isSubmitting ? 'Бронируется...' : 'Забронировать' }}
           </button>
