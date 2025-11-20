@@ -219,21 +219,25 @@
 
     <!-- Карта -->
     <section>
-      <div class="h-96 bg-white/5 border border-white/10 rounded-xl overflow-hidden">
-        <iframe 
-          src="https://yandex.ru/map-widget/v1/?ll=50.204552%2C53.221923&z=16&l=map&mode=poi&poi%5Bpoint%5D=50.202182%2C53.222573&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D243452895564"
-          width="100%" 
-          height="100%" 
-          frameborder="0"
-          loading="lazy"
-          class="rounded-xl"
-          title="Карта расположения ресторана Вкусная компания"
-          allowfullscreen="true"
-        ></iframe>
+      <div class="h-96 flex items-center justify-center">
+        <div class="h-full w-full md:w-1/2 border border-white/10 rounded-xl overflow-hidden" style="position:relative;overflow:hidden;">
+          <a href="https://yandex.ru/maps/51/samara/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Самара</a>
+          <a href="https://yandex.ru/maps/51/samara/?ll=50.174556%2C53.198980&mode=usermaps&source=constructorLink&um=constructor%3Aac136067c6dfcbcb5eeb6ac755793a4208c677bcfc11e7eb7c9f5084f4880789&utm_medium=mapframe&utm_source=maps&z=12.09" style="color:#eee;font-size:12px;position:absolute;top:14px;">Карта Самары с улицами и номерами домов — Яндекс Карты</a>
+          <iframe 
+            src="https://yandex.ru/map-widget/v1/?ll=50.174556%2C53.198980&mode=usermaps&source=constructorLink&um=constructor%3Aac136067c6dfcbcb5eeb6ac755793a4208c677bcfc11e7eb7c9f5084f4880789&z=12.09" 
+            width="100%" 
+            height="100%" 
+            frameborder="0" 
+            loading="lazy"
+            allowfullscreen="true" 
+            style="position:relative;display:block;border:0;"
+            title="Карта Самары — виджет Яндекс.Карт"
+          ></iframe>
+        </div>
       </div>
       <div class="mt-4 text-center">
         <a 
-          href="https://yandex.ru/maps/51/samara/?indoorLevel=1&ll=50.204552%2C53.221923&mode=poi&poi%5Bpoint%5D=50.202182%2C53.222573&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D243452895564&utm_source=review&z=16.73"
+          href="https://yandex.ru/maps/-/CLGRBOzG"
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center text-primary-300 hover:text-primary-200 transition-colors duration-300 text-sm"
@@ -377,7 +381,7 @@ usePageSEO({
   title: 'Контакты',
   description: 'Свяжитесь с «Вкусной Компанией»: г. Самара, ул. Советской Армии, 177. Бронирование: +7 (917) 142-15-74 или через форму обратной связи.',
   keywords: ['контакты', 'адрес', 'телефон', 'бронирование', 'Самара', 'ресторан'],
-  image: 'https://vkusnayakompania.ru/images/atmosphere/main-hall.jpg'
+  image: 'https://vkusnayakompania.ru/images/atmosphere/main-hall.svg'
 })
 
 // Добавляем structured data для филиалов

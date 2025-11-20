@@ -65,6 +65,7 @@ const openReservationModal = () => {
 // Инициализация меню (аналог useLayoutEffect)
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
+  document.addEventListener('keydown', handleKeydown)
   
   nextTick(() => {
     const ctx = gsap.context(() => {
@@ -98,6 +99,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
+  document.removeEventListener('keydown', handleKeydown)
 })
 
 const buildOpenTimeline = () => {
@@ -330,13 +332,33 @@ const toggleMenu = () => {
 
   if (target) {
     playOpen()
+    // Фокусируемся на первом элементе меню при открытии
+    nextTick(() => {
+      const firstLink = panelRef.value?.querySelector('a')
+      if (firstLink) {
+        firstLink.focus()
+      }
+    })
   } else {
     playClose()
+    // Возвращаем фокус на кнопку меню при закрытии
+    nextTick(() => {
+      if (toggleBtnRef.value) {
+        toggleBtnRef.value.focus()
+      }
+    })
   }
 
   animateIcon(target)
   animateColor(target)
   animateText(target)
+}
+
+// Обработка клавиши Escape
+const handleKeydown = (event) => {
+  if (event.key === 'Escape' && isOpen.value) {
+    toggleMenu()
+  }
 }
 </script>
 
@@ -438,6 +460,7 @@ const toggleMenu = () => {
           backgroundColor: 'var(--brand-primary-700)'
         }"
         :aria-hidden="!isOpen"
+        :inert="!isOpen"
       >
         <div class="sm-panel-inner flex-1 flex flex-col gap-5">
           <ul

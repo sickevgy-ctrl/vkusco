@@ -331,7 +331,7 @@ usePageSEO({
   title: 'Меню',
   description: 'Ознакомьтесь с нашим меню. Изысканные блюда европейской кухни, приготовленные из свежих ингредиентов.',
   keywords: ['меню', 'блюда', 'европейская кухня', 'итальянская кухня', 'паста', 'пицца', 'десерты'],
-  image: 'https://vkusnayakompania.ru/images/atmosphere/main-hall.jpg',
+  image: 'https://vkusnayakompania.ru/images/atmosphere/main-hall.svg',
   structuredData: menuStructuredData
 })
 </script>

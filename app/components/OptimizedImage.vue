@@ -8,21 +8,38 @@
     ></div>
     
     <!-- Оптимизированное изображение -->
+    <!-- Для SVG используем простой img, для остальных - picture с форматами -->
+    <template v-if="isSvg">
+      <img
+        ref="imageRef"
+        :src="fallbackSrc"
+        :alt="alt"
+        :loading="loading"
+        :decoding="decoding"
+        :class="[imgClass, { 'transition-opacity duration-300': showPlaceholder }]"
+        :style="{ opacity: (isLoaded || !showPlaceholder) ? 1 : 0 }"
+        :width="width"
+        :height="height"
+        @load="onLoad"
+        @error="onError"
+      >
+    </template>
     <picture 
+      v-else
       v-show="isLoaded || !showPlaceholder"
       class="block"
       :class="{ 'opacity-0': !isLoaded && showPlaceholder, 'opacity-100': isLoaded || !showPlaceholder }"
     >
       <!-- AVIF формат для современных браузеров -->
       <source 
-        v-if="avifSrc && isLoaded" 
+        v-if="avifSrc" 
         :srcset="avifSrc" 
         type="image/avif"
       >
       
       <!-- WebP формат для браузеров с поддержкой -->
       <source 
-        v-if="webpSrc && isLoaded" 
+        v-if="webpSrc" 
         :srcset="webpSrc" 
         type="image/webp"
       >
@@ -55,7 +72,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch, nextTick } from 'vue'
 import { useLazyLoading } from '../composables/useLazyLoading'
 
 interface Props {
@@ -105,6 +122,11 @@ const { observe, isIntersecting } = useLazyLoading({
   once: true
 })
 
+// Проверка, является ли изображение SVG
+const isSvg = computed(() => {
+  return props.src.toLowerCase().endsWith('.svg')
+})
+
 // Автоматическое определение форматов на основе базового пути
 const basePath = computed(() => {
   const path = props.src
@@ -114,16 +136,16 @@ const basePath = computed(() => {
 
 const avifSrc = computed(() => {
   // Не генерируем AVIF для SVG файлов
-  if (props.src.toLowerCase().endsWith('.svg')) {
-    return props.avifSrc || undefined
+  if (isSvg.value) {
+    return undefined
   }
   return props.avifSrc || `${basePath.value}.avif`
 })
 
 const webpSrc = computed(() => {
   // Не генерируем WebP для SVG файлов
-  if (props.src.toLowerCase().endsWith('.svg')) {
-    return props.webpSrc || undefined
+  if (isSvg.value) {
+    return undefined
   }
   return props.webpSrc || `${basePath.value}.webp`
 })
@@ -144,29 +166,37 @@ const onError = (event: Event) => {
   emit('error', event)
 }
 
+// Автоматически начинаем загрузку когда элемент попадает в viewport
+watch(isIntersecting, (intersecting) => {
+  if (intersecting && !isLoaded.value && !hasError.value) {
+    isLoaded.value = true
+  }
+})
+
 // Наблюдаем за элементом когда он примонтирован
 onMounted(() => {
   if (props.loading === 'lazy' && imageRef.value) {
     observe(imageRef.value)
   } else if (props.loading === 'eager') {
-    // Для eager loading сразу помечаем как загруженное
-    isLoaded.value = true
-  }
-})
-
-// Оптимизация: предзагружаем изображения с высоким приоритетом
-if (props.loading === 'eager' && process.client) {
-  const link = document.createElement('link')
-  link.rel = 'preload'
-  link.as = 'image'
-  link.href = fallbackSrc.value
-  document.head.appendChild(link)
-}
-
-// Автоматически начинаем загрузку когда элемент попадает в viewport
-watch(isIntersecting, (intersecting) => {
-  if (intersecting && !isLoaded.value && !hasError.value) {
-    isLoaded.value = true
+    // Для eager loading сразу начинаем загрузку
+    // Не устанавливаем isLoaded сразу, чтобы браузер мог правильно выбрать формат
+    nextTick(() => {
+      isLoaded.value = true
+    })
+    
+    // Оптимизация: предзагружаем изображения с высоким приоритетом
+    if (process.client && fallbackSrc.value) {
+      try {
+        const link = document.createElement('link')
+        link.rel = 'preload'
+        link.as = 'image'
+        link.href = fallbackSrc.value
+        // Не добавляем onerror для preload, так как это может вызвать предупреждения
+        document.head.appendChild(link)
+      } catch (error) {
+        // Игнорируем ошибки preload
+      }
+    }
   }
 })
 </script>

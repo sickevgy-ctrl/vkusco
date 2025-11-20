@@ -105,7 +105,7 @@ export default defineNuxtConfig({
         { property: 'og:site_name', content: brand.name },
         { property: 'og:title', content: `${brand.name} — Ресторан изысканной кухни` },
         { property: 'og:description', content: `${brand.name} — ресторан европейской кухни в самом сердце города. Забронируйте столик для незабываемого ужина.` },
-        { property: 'og:image', content: 'https://vkusnayakompania.ru/images/atmosphere/main-hall.jpg' },
+        { property: 'og:image', content: 'https://vkusnayakompania.ru/images/atmosphere/main-hall.svg' },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
         { property: 'og:locale', content: 'ru_RU' },
@@ -114,7 +114,7 @@ export default defineNuxtConfig({
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: `${brand.name} — Ресторан изысканной кухни` },
         { name: 'twitter:description', content: `${brand.name} — ресторан европейской кухни в самом сердце города. Забронируйте столик для незабываемого ужина.` },
-        { name: 'twitter:image', content: 'https://vkusnayakompania.ru/images/atmosphere/main-hall.jpg' },
+        { name: 'twitter:image', content: 'https://vkusnayakompania.ru/images/atmosphere/main-hall.svg' },
         
         // Mobile
         { name: 'mobile-web-app-capable', content: 'yes' },
@@ -137,10 +137,8 @@ export default defineNuxtConfig({
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
         
-        // Предзагрузка LCP изображения
-        { rel: 'preload', href: '/images/atmosphere/main-hall.jpg', as: 'image', type: 'image/jpeg' },
-        { rel: 'preload', href: '/images/atmosphere/main-hall.webp', as: 'image', type: 'image/webp' },
-        { rel: 'preload', href: '/images/atmosphere/main-hall.avif', as: 'image', type: 'image/avif' }
+        // Предзагрузка LCP изображения (используем SVG заглушку)
+        { rel: 'preload', href: '/images/atmosphere/main-hall.svg', as: 'image', type: 'image/svg+xml' }
       ],
       script: [
         {
@@ -179,7 +177,7 @@ export default defineNuxtConfig({
             ],
             priceRange: '$$',
             servesCuisine: ['Европейская', 'Итальянская'],
-            image: 'https://vkusnayakompania.ru/images/atmosphere/main-hall.jpg',
+            image: 'https://vkusnayakompania.ru/images/atmosphere/main-hall.svg',
             logo: 'https://vkusnayakompania.ru/logo.svg'
           })
         }

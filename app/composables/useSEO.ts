@@ -99,7 +99,7 @@ export const useSEO = () => {
       ],
       priceRange: config?.priceRange || '$$',
       servesCuisine: config?.servesCuisine || ['Европейская', 'Итальянская'],
-      image: config?.image || `${siteUrl}/images/atmosphere/main-hall.jpg`,
+      image: config?.image || `${siteUrl}/images/atmosphere/main-hall.svg`,
       logo: `${siteUrl}/logo.svg`
     }
   }
@@ -264,7 +264,7 @@ export const usePageSEO = (config: SEOConfig) => {
   const title = generateTitle(config.title)
   const description = generateDescription(config.description)
   const keywords = generateKeywords(config.keywords)
-  const image = config.image || `${siteUrl}/images/atmosphere/main-hall.jpg`
+  const image = config.image || `${siteUrl}/images/atmosphere/main-hall.svg`
   const url = config.url || siteUrl
 
   const seoData = {

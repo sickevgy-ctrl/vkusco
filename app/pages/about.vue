@@ -3,7 +3,7 @@
     <!-- Заголовок -->
     <section class="relative py-20 text-white overflow-hidden">
       <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"></div>
-      <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('/images/atmosphere/main-hall.jpg')"></div>
+      <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('/images/atmosphere/main-hall.svg')"></div>
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1 v-split class="text-4xl md:text-5xl font-playfair font-bold mb-4">О нас</h1>
         <p v-split="{ types: 'words, chars', delayStep: 0.02 }" class="text-xl text-gray-300">Семейный ресторан‑кондитерская с лучшими блюдами разных кухонь мира</p>
@@ -116,68 +116,28 @@
     </section>
 
     <!-- Отзывы клиентов -->
-    <section class="py-16" aria-labelledby="client-reviews-title">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <h2 id="client-reviews-title" class="section-title">Что говорят наши гости</h2>
-          <div v-if="averageRating > 0" class="flex items-center justify-center space-x-4 mt-4">
-            <div class="flex text-primary-400">
-              <svg v-for="star in 5" :key="star" class="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-              </svg>
-            </div>
-            <span class="text-white font-semibold text-lg">{{ averageRating.toFixed(1) }}</span>
-            <span class="text-gray-300">({{ totalCount }} отзывов)</span>
-          </div>
+    <section class="py-12 w-full" aria-labelledby="reviews-title" style="background-color: var(--brand-primary-700);">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="text-center mb-8">
+          <h2 id="reviews-title" v-split class="section-title opacity-0 transform translate-y-10">Что говорят о нас</h2>
+          <p class="text-gray-300 mt-4 max-w-2xl mx-auto">
+            Реальные отзывы наших гостей с Яндекс.Карт. Читайте, что говорят посетители о качестве блюд, сервисе и атмосфере нашего ресторана.
+          </p>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div 
-            v-for="(review, index) in recentReviews.slice(0, 3)" 
-            :key="review.id"
-            class="bg-white/5 backdrop-blur p-6 rounded-[24px] shadow-lg border border-white/10"
-          >
-            <div class="flex items-center justify-between mb-4">
-              <div class="flex text-primary-400">
-                <svg 
-                  v-for="star in generateStars(review.rating)" 
-                  :key="star.index" 
-                  class="w-5 h-5" 
-                  :class="star.filled ? 'fill-current' : 'text-gray-600'"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                </svg>
-              </div>
-              <span class="text-gray-400 text-sm">{{ formatReviewDate(review.date) }}</span>
-            </div>
-            <p class="text-gray-200/90 mb-4 italic">"{{ review.text }}"</p>
-            <div class="flex items-center justify-between">
-              <div class="font-semibold text-white">{{ review.author }}</div>
-              <a 
-                href="https://yandex.ru/maps/org/vkusnaya_kompaniya/243452895564/reviews/?filter=alternate_vertical%3ARequestWindow&indoorLevel=1&ll=50.198543%2C53.222351&mode=search&sctx=ZAAAAAgBEAAaKAoSCeLqAIi7DklAEb%2FXEByXmUpAEhIJX%2BtSI%2FQzpT8RL8GpDyTvjD8iBgABAgMEBSgKOABAmZ0GSAFiCW1heGFkdj0xMGI%2FcmVhcnI9c2NoZW1lX0xvY2FsL0dlb3VwcGVyL0FkdmVydHMvTWF4YWR2VG9wTWl4L01heGFkdkZvck1peD03agJydZ0BzczMPaABAKgBAL0BdPVF%2FcIBBszCsfeKB4ICH9CS0LrRg9GB0L3QsNGPINCa0L7QvNC%2F0LDQvdC40Y%2BKAgCSAgCaAgxkZXNrdG9wLW1hcHM%3D&sll=50.198543%2C53.222351&sspn=0.026391%2C0.008999&tab=reviews&text=%D0%92%D0%BA%D1%83%D1%81%D0%BD%D0%B0%D1%8F%20%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F&utm_source=review&z=16"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-primary-300 hover:text-primary-200 text-sm transition-colors duration-300"
-              >
-                Яндекс.Карты →
-              </a>
-            </div>
-          </div>
-        </div>
-        
-        <div class="text-center mt-8">
-          <a 
-            href="https://yandex.ru/maps/org/vkusnaya_kompaniya/243452895564/reviews/?filter=alternate_vertical%3ARequestWindow&indoorLevel=1&ll=50.198543%2C53.222351&mode=search&sctx=ZAAAAAgBEAAaKAoSCeLqAIi7DklAEb%2FXEByXmUpAEhIJX%2BtSI%2FQzpT8RL8GpDyTvjD8iBgABAgMEBSgKOABAmZ0GSAFiCW1heGFkdj0xMGI%2FcmVhcnI9c2NoZW1lX0xvY2FsL0dlb3VwcGVyL0FkdmVydHMvTWF4YWR2VG9wTWl4L01heGFkdkZvck1peD03agJydZ0BzczMPaABAKgBAL0BdPVF%2FcIBBszCsfeKB4ICH9CS0LrRg9GB0L3QsNGPINCa0L7QvNC%2F0LDQvdC40Y%2BKAgCSAgCaAgxkZXNrdG9wLW1hcHM%3D&sll=50.198543%2C53.222351&sspn=0.026391%2C0.008999&tab=reviews&text=%D0%92%D0%BA%D1%83%D1%81%D0%BD%D0%B0%D1%8F%20%D0%9A%D0%BE%D0%BC%D0%BF%D0%B0%D0%BD%D0%B8%D1%8F&utm_source=review&z=16.73"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center space-x-2 text-primary-300 hover:text-primary-200 transition-colors duration-300"
-          >
-            <span>Читать все отзывы на Яндекс.Картах</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-            </svg>
-          </a>
+        <!-- Виджет отзывов Яндекс.Карт -->
+        <div class="flex justify-center">
+          <YandexReviewsWidget 
+            width="100%"
+            :height="800"
+            :max-reviews="10"
+            :border-radius="16"
+            border-color="rgba(0, 0, 0, 0.2)"
+            background-color="rgba(0, 0, 0, 0.1)"
+            theme="dark"
+            :show-photos="true"
+            :show-videos="false"
+          />
         </div>
       </div>
     </section>
@@ -200,20 +160,9 @@
 import { ref, onMounted } from 'vue'
 import { useReservationModal } from '@/composables/useReservationModal'
 import { usePageSEO, useSEO } from '@/composables/useSEO'
-import { useYandexReviews } from '@/composables/useYandexReviews'
 
 // Глобальное состояние модального окна бронирования
 const { isReservationOpen } = useReservationModal()
-
-// Отзывы с Яндекс.Карт
-const {
-  recentReviews,
-  averageRating,
-  totalCount,
-  fetchReviews,
-  formatReviewDate,
-  generateStars
-} = useYandexReviews()
 
 // SEO оптимизация для страницы "О нас"
 const { generateFAQStructuredData } = useSEO()
@@ -245,12 +194,12 @@ usePageSEO({
   title: 'О нас',
   description: 'Семейный ресторан‑кондитерская: уют, честность и вкус. Детская зона, семейные мастер‑классы и лучшие блюда разных кухонь мира.',
   keywords: ['о нас', 'история', 'философия', 'семейный ресторан', 'кондитерская', 'детская зона'],
-  image: 'https://vkusnayakompania.ru/images/atmosphere/main-hall.jpg',
+  image: 'https://vkusnayakompania.ru/images/atmosphere/main-hall.svg',
   structuredData: faqStructuredData
 })
 
-// Загружаем отзывы при монтировании компонента
+// Компонент готов к использованию
 onMounted(() => {
-  fetchReviews()
+  // Инициализация завершена
 })
 </script>
